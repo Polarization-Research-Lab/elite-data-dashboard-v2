@@ -1,0 +1,224 @@
+<div id='main' class='row'>
+    <div id="profile-side" class="col-3 d-flex flex-column align-items-end">
+        <div class="profile-wrapper text-center">
+            <div id="avatar">
+                <a href="" class="x-auto">
+                    <!-- <img class='avatar-img' src="https://theunitedstates.io/images/congress/450x550/{{bioguideid}}.jpg" alt="avatar" onerror="this.style.display='none'"> -->
+                    <img class='avatar-img' src="{{ site.baseurl }}/assets/img/legislators/profile_images/{{bioguideid}}.jpg" alt="avatar" onerror="this.style.display='none'">
+                </a>
+            </div>
+        </div>
+        <br>
+        <div class='' id='profile-info'>
+            <h1 class=''>{{legislator.last_name}}, {{legislator.first_name}}</h1>
+            <h3 class='profile-info-sub'>{{legislator.party}} ({{legislator.state}})</h3>
+            <h3 class='profile-info-sub'>{{legislator.type}}</h3>
+            <h3 class='profile-info-sub'>Serving since {{legislator.serving since}}</h3>
+            <br>
+            <h4 class=''>Pledge of Civility? {{legislator.pledge of civility}}
+                <div style='auto; width: 70%; margin-top: 30px;'>
+                    <img src='{{ site.baseurl }}{{ legislator.pledge icon }}' id='pledgeicon' width='75' height='75' style='margin-left: auto; margin-right: auto; display: block;'>
+                </div>
+        </div>
+    </div><!-- #sidebar -->
+    <div id='profile-main' class='col-9'>
+        <div class="accordion" id="accordionPanelsStayOpenExample">
+            <div class="accordion-item">
+                <h1 class="accordion-header" id="panelsStayOpen-headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                        What They Say
+                    </button>
+                </h1>
+                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                    <div class="accordion-body">
+                        <div class='row'>
+                            <div class='col-4'>
+                                <h2 class='text-center'>Compared to their colleagues:</h2>
+                                <div class='row say-card-div'>
+                                    <div class='col-6 say-card' data-chart-to-insert="{{ site.baseurl }}/assets/js/charts/gauge.js">
+                                        <canvas id='gauge1' class='dynamic-chart' data-script="{{ site.baseurl }}/assets/js/charts/gauge.js" data-gauge="{{ legislator.scorecard.compromise.rank }}" data-max='100' data-color='green'></canvas>
+                                        <p class='text-center say-card-heading'>20th in <b>Compromising<br>Language</b></p>
+                                        <div class='say-card-child'>
+                                            <div class='row'>
+                                                <div class='col-7 say-card-child-plot'>
+                                                    <canvas id='card1-child' class='card-child dynamic-chart' data-script="{{ site.baseurl }}/assets/js/charts/sourcebar.js" data-sources="[{{ legislator.scorecard.compromise.sources.floor.percent }}, {{ legislator.scorecard.compromise.sources.newsletters.percent }}, {{ legislator.scorecard.compromise.sources.tweets.percent }}, {{ legislator.scorecard.compromise.sources.statements.percent }}]"></canvas>
+                                                </div>
+                                                <div class='col-5'>
+                                                    <p><b>Recent example:</b></p>
+                                                    <p><em>{{legislator.scorecard.compromise.last_example_date_source}}</em></p>
+                                                    <blockquote class='say-card-child-quote'>
+                                                        "{{legislator.scorecard.compromise.last_example}}"
+                                                    </blockquote>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class='col-6 say-card'>
+                                        <canvas id='gauge2' class='dynamic-chart' data-script="{{ site.baseurl }}/assets/js/charts/gauge.js" data-gauge="{{ legislator.scorecard.policy.rank }}" data-max='100' data-color='green'></canvas>
+                                        <p class='text-center say-card-heading'>30th in <b>Policy Discussion</b></p>
+                                        <div class='say-card-child'>
+                                            <div class='row'>
+                                                <div class='col-7 say-card-child-plot'>
+                                                    <canvas id='card2-child' class='card-child dynamic-chart' data-script="{{ site.baseurl }}/assets/js/charts/sourcebar.js" data-sources="[{{ legislator.scorecard.policy.sources.floor.percent }}, {{ legislator.scorecard.policy.sources.newsletters.percent }}, {{ legislator.scorecard.policy.sources.tweets.percent }}, {{ legislator.scorecard.policy.sources.statements.percent }}]"></canvas>
+                                                </div>
+                                                <div class='col-5'>
+                                                    <p><b>Recent example:</b></p>
+                                                    <p><em>{{legislator.scorecard.policy.last_example_date_source}}</em></p>
+                                                    <blockquote class='say-card-child-quote'>
+                                                        "{{legislator.scorecard.policy.last_example}}"
+                                                    </blockquote>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class='row say-card-div'>
+                                    <div class='col-6 say-card'>
+                                        <canvas id='gauge3' class='dynamic-chart' data-script="{{ site.baseurl }}/assets/js/charts/gauge.js" data-gauge="{{ legislator.scorecard.insult.rank }}" data-max='100' data-color='green'></canvas>
+                                        <p class='text-center say-card-heading'>90th in <b>Insulting Language</b></p>
+                                        <div class='say-card-child'>
+                                            <div class='row'>
+                                                <div class='col-7 say-card-child-plot'>
+                                                    <canvas id='card3-child' class='card-child dynamic-chart' data-script="{{ site.baseurl }}/assets/js/charts/sourcebar.js" data-sources="[{{ legislator.scorecard.insult.sources.floor.percent }}, {{ legislator.scorecard.insult.sources.newsletters.percent }}, {{ legislator.scorecard.insult.sources.tweets.percent }}, {{ legislator.scorecard.insult.sources.statements.percent }}]"></canvas>
+                                                </div>
+                                                <div class='col-5'>
+                                                    <p><b>Recent example:</b></p>
+                                                    <p><em>{{legislator.scorecard.insult.last_example_date_source}}</em></p>
+                                                    <blockquote class='say-card-child-quote'>
+                                                        "{{legislator.scorecard.insult.last_example}}"
+                                                    </blockquote>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class='col-6 say-card'>
+                                        <canvas id='gauge4' class='dynamic-chart' data-script="{{ site.baseurl }}/assets/js/charts/gauge.js" data-gauge="{{ legislator.scorecard.blame.rank }}" data-max='100' data-color='green'></canvas>
+                                        <p class='text-center say-card-heading'>95th in <b>Blame</b></p>
+                                        <div class='say-card-child'>
+                                            <div class='row'>
+                                                <div class='col-7 say-card-child-plot'>
+                                                    <canvas id='card4-child' class='card-child dynamic-chart' data-script="{{ site.baseurl }}/assets/js/charts/sourcebar.js" data-sources="[{{ legislator.scorecard.blame.sources.floor.percent }}, {{ legislator.scorecard.blame.sources.newsletters.percent }}, {{ legislator.scorecard.blame.sources.tweets.percent }}, {{ legislator.scorecard.blame.sources.statements.percent }}]"></canvas>
+                                                </div>
+                                                <div class='col-5'>
+                                                    <p><b>Recent example:</b></p>
+                                                    <p><em>{{legislator.scorecard.blame.last_example_date_source}}</em></p>
+                                                    <blockquote class='say-card-child-quote'>
+                                                        "{{legislator.scorecard.blame.last_example}}"
+                                                    </blockquote>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class='col-7' id='discourse'>
+                                <h2 class='text-center'>Discourse<br>Profile:</h2>
+                                <div class='' id='discourse-rose-div'>
+                                    <canvas id='discourse-rose' class='dynamic-chart' data-script="{{ site.baseurl }}/assets/js/charts/rose.js" data-data="[{{ legislator.scorecard.insult.percent }},{{ legislator.scorecard.blame.percent }},{{ legislator.scorecard.credit claiming.percent }},{{ legislator.scorecard.compromise.percent }},{{ legislator.scorecard.policy.percent }},{{ legislator.scorecard.legislative discussion.percent }},{{ legislator.scorecard.foreign policy.percent }}]"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h1 class="accordion-header " id="panelsStayOpen-headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                        How They Vote
+                    </button>
+                </h1>
+                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                    <div class="accordion-body">
+                        <h2 class='text-center'>Ideology</h2>
+                        <div class='row' , id='ideology-div'>
+                            <canvas id = "ideology"  class='dynamic-chart' data-script="{{ site.baseurl }}/assets/js/charts/hist.js" data-data="{{ meta.ideoHist }}" data-ideoscore="{{ legislator.voting record.ideology score }}"></canvas>
+                            <!-- <script type="text/javascript" src="{{ site.baseurl }}/assets/js/charts/hist.js" data-canvasid="ideology"></script> -->
+                        </div>
+                        <h2>Party Loyalty and Attendance</h2>
+                        <div class='row'>
+                            <table class='text-center'>
+                                <caption>Data from <a href='https://voteview.com'>voteview.com</a></caption>
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Doe</th>
+                                        <th>House Median - Independent</th>
+                                        <th>House Median</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Votes Cast</td>
+                                        <td>200</td>
+                                        <td>200</td>
+                                        <td>200</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Attendance</td>
+                                        <td>100%</td>
+                                        <td>100%</td>
+                                        <td>100%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Party Loyalty</td>
+                                        <td>91%</td>
+                                        <td>98%</td>
+                                        <td>98%</td>
+                                    </tr>
+                                </tbody>
+                                <!-- 					  <tfoot>
+					    <tr>
+					      <td></td>
+					      <td></td>
+					      <td></td>
+					    </tr>
+					  </tfoot> -->
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h1 class="accordion-header" id="panelsStayOpen-headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                        Their Legislative Effectiveness
+                    </button>
+                </h1>
+                <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+                    <div class="accordion-body">
+                        <table class='text-center'>
+                            <caption>Data from <a href='https://thelawmakers.org/'>Center for Effective Lawmaking</a></caption>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Sponsored</th>
+                                    <th>Committee Action</th>
+                                    <th>Action on the Floor</th>
+                                    <th>Passed</th>
+                                    <th>Made Law</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Substantive Bills</td>
+                                    <td>12</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                            </tbody>
+                            <!-- 					  <tfoot>
+					    <tr>
+					      <td></td>
+					      <td></td>
+					      <td></td>
+					    </tr>
+					  </tfoot> -->
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

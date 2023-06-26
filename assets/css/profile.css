@@ -1,0 +1,252 @@
+.page-content {
+    padding: 30px 0;
+    flex: 1;
+}
+
+#main-content {
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+
+
+/* - - - - - */
+
+#main {
+    padding: 0px;
+    width: 100%;
+    min-width: 800px;
+}
+
+#profile-side {
+    /*  background-color: rgba(0,0,200,.04);*/
+    width: 30%;
+    height: 90vh;
+    overflow-x: scroll;
+    padding: 20px;
+}
+
+#profile-main {
+    /*  background-color: rgba(200,0,0,.04);*/
+    width: 70%;
+    height: 90vh;
+    overflow-x: scroll;
+    padding: 20px;
+}
+
+.profile-main-row {
+    margin-bottom: 30px;
+
+}
+
+#profile-info {
+    width: 90%;
+}
+
+.profile-info-sub {
+    color: rgb(0, 0, 0, .5);
+    font-size: 20px;
+}
+
+
+.profile-wrapper {
+    /*  margin-top: 2rem;*/
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+#main * {
+    /*  border: 2px solid rgba(0,0,0,.1);*/
+}
+
+
+.accordion-item {
+    background-color: rgba(0, 0, 0, 0);
+    margin-bottom: 30px;
+    border: 0;
+}
+
+/*.accordion-header,*/
+.accordion-button {
+    background-color: rgba(0, 0, 0, 0);
+    font-size: 44px;
+    /*  font-style: italic;*/
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: rgba(0, 0, 0, 0);
+    color: rgba(0, 0, 0, 1);
+    border-color: rgba(0, 0, 0, 0);
+    outline-width: 0;
+}
+
+.accordion-body {
+    /*  background-color: rgba(0, 0, 0, 0);*/
+    background-color: rgba(0, 0, 0, .05);
+    border-radius: 20px;
+    margin-top: 10px;
+    padding: 50px;
+    /*  padding-bottom: 10px;*/
+}
+
+
+
+
+.say-card-div {
+    width: 100%;
+}
+
+.say-card {
+    width: 50%;
+    transition: transform 0.2s ease-in-out;
+    /*  height: 100px;*/
+}
+
+.say-card:hover {
+    transform: scale(1.2);
+}
+
+.say-card-heading {
+    font-size: 15px;
+}
+
+.say-card-child {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    top: -30%;
+    left: 100%;
+    backdrop-filter: blur(20px);
+    background-color: rgba(255, 255, 255, 0.7);
+    width: 500px;
+    height: 300px;
+    padding: 30px;
+    transition: opacity .3s ease-in-out, visibility 0s linear 0.5s;
+    border-radius: 30px;
+    /*  color: white;*/
+}
+
+.say-card:hover .say-card-child {
+    opacity: .99;
+    transition-delay: 1s;
+    visibility: visible;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.say-card-child-quote {
+    overflow-y: scroll;
+    height: 150px;
+}
+
+.say-card-child-plot {
+    padding: 20px;
+}
+
+#discourse {
+    margin-left: auto;
+}
+
+#discourse-rose-div {
+    height: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    /*  background-color: rgba(0, 0, 0, .2); border-radius: 20px;*/
+}
+
+#discourse-rose {
+    /*  margin-right: 0px;*/
+}
+
+.accordion-button:focus,
+.accordion-button:active,
+.accordion-button:not(.collapsed) {
+    box-shadow: none;
+    text-decoration: none;
+}
+
+.accordion-button,
+.accordion-header {
+    text-decoration: none;
+
+}
+
+
+#ideology-div {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 300px;
+}
+
+
+
+.card-child {
+    /*  width: 100%;*/
+    /*  height: 100%;*/
+    /*  margin: 10px;*/
+}
+
+
+
+#avatar {
+    margin-top: 20px;
+    display: block;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    /* fixed the zoom in Safari */
+
+    width: 15vw;
+    height: 15vw;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid white;
+    transition: transform 0.3s;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+#avatar:hover {
+    transform: scale(1.2);
+}
+
+.avatar-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/*.avatar-img:hover {
+  transform: scale(1.2);
+}*/
+
+.greentext {
+    color: green;
+}
+
+.redtext {
+    color: red;
+}
+
+
+
+#pledgeicon {}
+
+
+
+
+
+
+
+
+
+.page-layout-content {
+    width: 60vw;
+    min-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
