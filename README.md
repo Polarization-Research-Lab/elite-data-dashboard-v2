@@ -1,6 +1,7 @@
 # ToDo
+- [ ] update landing display to be more interesting
+- [ ] add "..." animation to wait for images to load before showing legislators
 - [ ] highlight red + warning message for "please enter a valid state / zipcode"
-- [ ] build show profiles function
 - [ ] state autocomplete on enter
 
 
