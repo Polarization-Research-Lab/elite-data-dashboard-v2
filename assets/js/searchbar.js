@@ -225,7 +225,7 @@ function updateSearchResults(query) {
     function createProfileElement(bioguideId) {
         // Create the profile element
         const profileElement = document.createElement('a');
-        profileElement.href = `/profile?bioguideid=${bioguideId}`; // Set the href attribute with the dynamic URL
+        profileElement.href = site.baseurl + `/profile?bioguideid=${bioguideId}`; // Set the href attribute with the dynamic URL
         profileElement.classList.add('search-profile');
         profileElement.style.textAlign = 'center';
 
