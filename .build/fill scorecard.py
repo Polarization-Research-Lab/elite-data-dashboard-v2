@@ -13,7 +13,7 @@ with open('../assets/data/legislators.json', 'r') as file: legislators = json.lo
 
 # with db.Session() as session:
 sources = ['floor', 'newsletters', 'tweets', 'statements']
-categories = ['blame','compromise','credit claiming','insult','policy','foreign policy','legislative discussion']
+categories = ['blame','compromise','credit claiming','insult','policy','foreign policy','legislative discussion','advertising']
 
 
 for l in legislators: # l is bioguide_id

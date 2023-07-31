@@ -12,7 +12,7 @@ function build () {
     {
       type: 'polarArea',
       data: {
-        labels: ['Insulting Language', 'Blame the other side', 'Credit Claiming', 'Compromising Language', 'Policy Discussion', 'Legislative Discussion', 'Foreign Policy'],
+        labels: ['Insulting Language', 'Blame the other side', 'Credit Claiming', 'Compromising Language', 'Policy Discussion', 'Legislative Discussion', 'Foreign Policy', 'Advertising'],
         datasets: [
           {
             label: 'Dataset 1',
