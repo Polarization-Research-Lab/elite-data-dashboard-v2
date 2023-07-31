@@ -195,24 +195,24 @@ header {
 }
 
 .home {
-    position: fixed;
+/*    position: fixed;*/
     top: $header-height;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
+/*    bottom: 0px;*/
+/*    left: 0px;*/
+/*    right: 0px;*/
 }
 
-.home .row-3,
-.home .row-6 {
+.home .row-3 {
     height: 25%;
 }
 
 .home .row-6 {
     height: 50%;
+    margin-bottom: 50px;
 }
 
 .reallybigfont {
-  font-size: 90px; /* Set the minimum, preferred, and maximum font size */
+  font-size: 70px; /* Set the minimum, preferred, and maximum font size */
   white-space: normal;
   word-wrap: break-word;
   text-overflow: ellipsis;
