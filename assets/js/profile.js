@@ -1,15 +1,10 @@
-fetch('assets/data/legislators.json')
-    .then(response => response.json())
-    .then(data => {
-        // Process the loaded JSON data
-        build(data)
-    })
-    .catch(error => {
-        // Handle any errors
-        console.error('Error:', error);
-    });
-
 function build(data) {
+
+
+
+
+
+    console.log('hey were moving')
     // Get the URL parameter
     const urlParams = new URLSearchParams(window.location.search);
     const bioguide = urlParams.get('bioguideid');

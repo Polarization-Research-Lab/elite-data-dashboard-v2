@@ -1,5 +1,7 @@
 chartInsertElements = document.querySelectorAll('.dynamic-chart');
 
+const charts = {}
+
 chartInsertElements.forEach(element => {
     chartToInsert = element.getAttribute('data-script');
     scriptElement = document.createElement('script');
@@ -10,6 +12,6 @@ chartInsertElements.forEach(element => {
             scriptElement.setAttribute(attribute.name, attribute.value);
         }
     })
-
+     
     element.appendChild(scriptElement)
 });

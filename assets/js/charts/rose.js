@@ -4,15 +4,14 @@ function build () {
     document.currentScript.parentNode.id
   ).getContext('2d')
 
-  data = JSON.parse(document.currentScript.dataset.data)
+  data = [1,1,1,1,1,1,1]
   title = document.currentScript.dataset.title
-  console.log(data)
   const chart = new Chart(
     ctx,
     {
       type: 'polarArea',
       data: {
-        labels: ['Insulting Language', 'Blame and Accusations', 'Credit Claiming', 'Bipartisanship and Compromise', 'Policy Discussion', 'Legislative Discussion', 'Foreign Policy', 'Advertising'],
+        labels: ['Insulting Language', 'Blame and Accusations', 'Credit Claiming', 'Bipartisanship and Compromise', 'Policy Discussion', 'Legislative Discussion', 'Foreign Policy'],//, 'Advertising'],
         datasets: [
           {
             label: 'Dataset 1',
@@ -32,7 +31,7 @@ function build () {
                 size: 12
               }
             },
-            max: 1,
+            // max: 1,
             ticks: {
               callback: function(value, index, values) {
                 return value + '%'; // modify the callback to add the percentage symbol
@@ -66,6 +65,7 @@ function build () {
 
     }
   )
+  charts[document.currentScript.parentNode.id] = chart
 }
 
 build()

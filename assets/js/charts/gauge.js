@@ -37,6 +37,8 @@ function build () {
       }
     }
   )
+  charts[document.currentScript.parentNode.id] = chart
+  return chart
 }
 
 build()

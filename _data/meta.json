@@ -1,0 +1,20 @@
+{
+	"category_labels": [
+        "Insulting Language",
+        "Blame and Accusations",
+        "Credit Claiming",
+        "Bipartisanship and Compromise",
+        "Policy Discussion",
+        "Legislative Discussion",
+        "Foreign Policy"
+	],
+	"categories": [
+		"insult",
+		"blame",
+		"credit_claiming",
+		"compromise",
+		"policy",		
+		"foreign_policy",
+		"legislative_discussion",
+	]
+}

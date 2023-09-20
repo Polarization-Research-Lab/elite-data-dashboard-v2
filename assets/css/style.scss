@@ -11,45 +11,15 @@ p {
     margin-bottom: 0px;
 }
 
-
+.container {
+    max-width: none;
+}
 
 // CUSTOM
 header {
     border: none;
     background-color: rgba(255, 255, 255, 1);
 }
-
-
-.search-bar {
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.1);
-    border-radius: 500px;
-    padding: 4px;
-    height: 70%;
-}
-
-.search-input-container {
-    align-items: center;
-    position: relative;
-    width: 100%;
-}
-
-.search-input {
-    border: none;
-    background-color: transparent;
-    outline: none;
-    width: auto;
-    display: inline-block;
-    padding-left: 10px;
-    color: rgb(117, 117, 117);
-}
-
-.autocomplete-text {
-    color: #888;
-    font-style: italic;
-    white-space: nowrap;
-}
-
 
 .resizing-input input,
 .resizing-input span {
@@ -71,165 +41,183 @@ header {
     /* Increase the size on hover */
 }
 
-$header-height: 100px;
+$header-height: 50px;
+
+.hidden-header {
+  transform: translateY(-100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.visible-header {
+  transform: translateY(0);
+}
 
 .site-header {
     height: $header-height;
+    border-bottom: none; /* Remove the bottom border */
+    background-color: rgba(0,0,0,0);
+    position: fixed;
+    top: 0px; right: 0px; left: 0px; 
 }
 
-.search-results {
-    opacity: 0;
-    // display: none;
-    position: absolute;
-    top: $header-height;
+.page-link-btn {
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid transparent;
+    border-radius: 20px;
+/*    padding: 10px 20px;*/
+/*    background-color: #f0f0f0;*/
+/*    color: #333;*/
+    padding: 10px;
+    margin: 5px;
+  transition: background-color 0.1s ease-in-out; /* Add transition property */
+
+}
+
+/* Apply grey border on hover */
+.page-link-btn:hover {
+    background-color: rgba(0, 0, 0, .1);
+}
+#start {
+    position:fixed;
+    top:100px;bottom:10px;left:50%;right:10px;
+}
+
+#main {
+    position:fixed;
+    top:100px;bottom:0px;left:0px;right:0px;
     width: 100%;
-    min-height: 20vh;
-    background-color: white;
-    border: 1px solid #ccc;
-    animation-duration: 0.3s;
+}
+
+#main-row {
+    position:absolute;
+    top:0px;bottom:0px;left:0px;right:0px;
+    width: 100%;
+}
+
+.custom-vfill-box {
+/*    position: absolute;*/
+/*    display: flex;*/
+    height: 95%;
+}
+
+.custom-vfill {
+    flex: 1;
+}
+
+.custom-rounded {
+    border-radius: 20px;
 }
 
 
+.c-blue {
+    background-color: blue;
+}
 
-.search-profile {
-    width: 10vw;
-    text-decoration: none;
+.c-green {
+    background-color: green;
+}
+
+/* Set flexbox layout for the sections */
+/*#section2 {*/
+.custom-vfill {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    color: black;
-    transition: transform 0.3s;
+    height: 100%; 
 }
 
-.search-profile-name {
-    color: black !important;
+
+/*#section2-sen-row, #section2-rep-row {*/
+/*}*/
+
+#section2 {
+    background-color: rgba(200,200,200,1);
 }
 
-.search-profile:hover {
-    text-decoration: none;
-    color: black;
+#section2-sen-row {
+/*    flex: 2; */
+/*    display: flex;*/
+/*    flex-direction: column;*/
 }
 
-.search-profile-image-container {
-    width: 100px;
-    /* Adjust the size as needed */
-    height: 100px;
-    /* Adjust the size as needed */
-    border-radius: 50%;
-    /* Make it a perfect circle */
-    overflow: hidden;
-    /* Hide any content outside the container */
-    border: 1px solid white;
-    transition: transform 0.3s;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    /* Apply a shadow effect */
+.sen-card-box-title {
+/*    flex: 1;*/
+}
+.sen-card-box {
+/*    flex: 5;*/
 }
 
-.search-profile-image {
-    width: 100%;
-    height: 100%;
+.sen-card, .rep-card {
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+}
+
+.hover-card {
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.hover-card:hover {
+  transform: scale(1.1);
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+#section2-rep-row {
+    flex: 18; /* 70% of the available space */
+    overflow: auto;
+}
+
+.img-sen {
+    width: 70%;
+    min-width: 70%;
+    height: 70%;
     object-fit: cover;
 }
 
-
-
-.search-profile-image-container:hover {
-    transform: scale(1.2);
+.img-rep {
+  height: 70px; 
+  width: 70px; 
+  min-width: 70px;
+  object-fit: cover;
 }
 
-.vertical-line-item {
-    border-right: 1px solid #000;
-    /* Set the color and thickness of the vertical line */
-    // padding-right: 20px; /* Adjust the spacing between the vertical line and the item's content */
-    // margin-right: 40px;
+#representatives-list {
 }
 
-.search-profile-name {
-    width: 90%;
-    white-space: normal;
-    word-wrap: break-word;
+.rep-card {
+
 }
 
 
-.drop-in {
-    animation-name: drop-in;
-    transform: translateY(0);
-    opacity: 1;
-    z-index: 1;
+/* Style for the "X" button in Section 3 */
+#closeSection3 {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 50px;
+    height: 49px;
+    border-radius: 50%;
+    background-color: rgba(0,0,0,.2);
+    color: #fff;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
-.drop-out {
-    animation-name: drop-out;
-    transform: translateY(-200px);
-    // opacity: 0; /* Add opacity property */
-    // z-index: 0;
+#closeSection3:hover {
+    background-color: rgba(0,0,0,.6);
+    transform: scale(1.1);
+    font-size: 25px;
 }
 
-@keyframes drop-in {
-    from {
-        transform: translateY(-$header-height);
-    }
-
-    to {
-        transform: translateY(0);
-    }
+#pol-card {
+    background-color: rgba(0,0,0,0);
+    border: none;
 }
 
-@keyframes drop-out {
-    from {
-        transform: translateY(0);
-        opacity: 1;
-        /* Add opacity property */
-    }
-
-    to {
-        transform: translateY(-200px);
-        opacity: 0;
-        /* Add opacity property */
-    }
+#s3-plots {
+    overflow-y: scroll;
 }
-
-
-header {
-    z-index: 2;
-}
-
-.home {
-/*    position: fixed;*/
-    top: $header-height;
-/*    bottom: 0px;*/
-/*    left: 0px;*/
-/*    right: 0px;*/
-}
-
-.home .row-3 {
-    height: 25%;
-}
-
-.home .row-6 {
-    height: 50%;
-    margin-bottom: 50px;
-}
-
-.reallybigfont {
-  font-size: 70px; /* Set the minimum, preferred, and maximum font size */
-  white-space: normal;
-  word-wrap: break-word;
-  text-overflow: ellipsis;
-}
-
-.keep-all {
-    word-break: keep-all;
-}
-
-
-
-
-
-
-
-
-// main * {
-// header * {
-// border: 2px solid black
-// }
