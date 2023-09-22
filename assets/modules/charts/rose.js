@@ -33,6 +33,7 @@ function build () {
             },
             // max: 1,
             ticks: {
+              z: 30,
               callback: function(value, index, values) {
                 return value + '%'; // modify the callback to add the percentage symbol
               }

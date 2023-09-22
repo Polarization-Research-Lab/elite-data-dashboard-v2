@@ -2,7 +2,7 @@
 <div class="col-4">
     <div class="h-50">
         <div class="card" id='pol-card'>
-            <img src="" id='avatar' class="card-img-top rounded-circle mx-auto mt-3 img-sen" alt="Politician">
+            <img src="{{ site.baseurl }}/assets/img/avatar-default.svg" id='avatar' class="card-img-top rounded-circle mx-auto mt-3 img-sen" alt="Politician" >
             <!-- SOCIAL MEDIA LINKS! Gov page; twitter; facebook; instagram; tiktok; whatever we get from our core table -->
             <div class="card-body text-center">
                 <h5 class="card-title"><span id="section3-chamber">Rep / Sen</span> <span id="section3-name">Name</span> <span id="section3-party">(P)</span></h5>
@@ -27,7 +27,7 @@
             <h3 class='text-center mb-0'>Discourse Profile</h3>
             <div class='' id='discourse'>
                 <div class='' id='discourse-rose-div'>
-                    <canvas id='discourse-rose' class='dynamic-chart' data-script="{{ site.baseurl }}/assets/js/charts/rose.js"></canvas>
+                    <canvas id='discourse-rose' class='dynamic-chart' data-script="{{ site.baseurl }}/assets/modules/charts/rose.js"></canvas>
                 </div>
             </div>
 
@@ -35,11 +35,11 @@
             <div class="w-100 row justify-content-center">
             {% assign index = 0 %}
             {% for category in site.data.meta.categories %}
-                <div class='col-4' id=''>
+                <div class='col-4 category-guage' id=''>
                     <div class='' id=''>
-                        <canvas id='gauge-{{category}}' class='dynamic-chart' data-script="{{ site.baseurl }}/assets/js/charts/gauge.js" data-gauge="50" data-max='100' data-color='green'></canvas>
+                        <canvas id='gauge-{{category}}' class='dynamic-chart' data-script="{{ site.baseurl }}/assets/modules/charts/gauge.js" data-gauge="50" data-max='100' data-color='green'></canvas>
                     </div>
-                    <h5 class="text-center">{{ site.data.meta.category_labels[index] }}</h5>
+                    <h5 class="text-center"><span class="place"></span> in {{ site.data.meta.category_labels[index] }}</h5>
                 </div>
 
             {% assign index = index | plus: 1 %}

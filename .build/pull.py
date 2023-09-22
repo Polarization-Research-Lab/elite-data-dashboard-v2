@@ -1,19 +1,19 @@
-﻿import json 
+﻿import json , urllib
 
 import ibis
 
-with open('../../../lab/.secrets/db.json', 'r') as file: creds = json.load(file)
+with open('../../../../.secrets/db.json', 'r') as file: creds = json.load(file)
 
 import ibis
 import pandas as pd
 
 # # Establish a connection to your MySQL database
-# conn = ibis.mysql.connect(
-#     host = creds['host'],
-#     user = creds['username'],
-#     password = creds['password'],
-#     database = creds['database'],
-# )
+conn = ibis.mysql.connect(
+    host = creds['host'],
+    user = creds['username'],
+    password = creds['password'],
+    database = creds['database'],
+)
 
 # # Load the table
 # table = conn.table('discourse_classification_0')
@@ -82,8 +82,21 @@ print(total_rows)
 #     print(bid)
 #     legislator = {}
 
+
+
+
+
+
 # Load the legislators.csv file into a pandas DataFrame
-legislators_df = pd.read_csv('legislators.csv')
+conn = ibis.mysql.connect(
+    host = creds['host'],
+    user = creds['username'],
+    password = creds['password'],
+    database = 'elite',
+)
+
+# Get Top
+legislators_df = conn.table('legislators').execute()
 
 # Assuming final_df and total_rows are already loaded
 

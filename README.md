@@ -12,3 +12,9 @@ your zip (we think) | your entire state
 show profiles underneath | the rest
 
 ^ big divider
+
+
+# LT Todo:
+
+- [ ] give credit to map creator
+- [ ] dependencies list

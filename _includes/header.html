@@ -5,7 +5,7 @@
             {%- assign page_paths = site.header_pages | default: default_paths -%}
             {%- assign titles_size = site.pages | map: 'title' | join: '' | size -%}
             <a href='https://polarizationresearchlab.org/'><img src="{{ site.baseurl }}/assets/img/logo.png" alt="Logo" class="rounded-circle logo-img mr-2" /></a>
-            <a class="site-title" rel="author" href="{{ "/" | relative_url }}"><button class='page-link-btn'>
+            <a class="site-title" rel="author" href="{{ '/' | relative_url }}"><button class='page-link-btn'>
                 {{ site.title | escape }}
             </button></a>
         </div>
