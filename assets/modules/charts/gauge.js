@@ -10,7 +10,7 @@ function build () {
   const chart = new Chart(
     ctx,
     {
-      type: 'doughnut',
+      type: 'gauge',
       data: {
         labels: [],
         datasets: [{
@@ -33,7 +33,17 @@ function build () {
           tooltip: {
             enabled: false
           },
-        }
+        },
+        needle: {
+          // Needle circle radius as the percentage of the chart area width
+          radiusPercentage: 2,
+          // Needle width as the percentage of the chart area width
+          widthPercentage: 1.2,
+          // Needle length as the percentage of the interval between inner radius (0%) and outer radius (100%) of the arc
+          lengthPercentage: 80,
+          // The color of the needle
+          color: 'rgba(0, 0, 0, 1)'
+        },
       }
     }
   )
