@@ -57,9 +57,6 @@ layout: base
                 </div>
             </div>
         </div>
-
-
-
         <!-- Section 2: Politician Selector -->
         <!-- <div class="col-md-4 custom-vfill-box d-none" id="section2-box"> -->
         <div class="col-md-4 custom-vfill-box animate__animated animate__slideInUp" id="section2-box">
@@ -88,7 +85,6 @@ layout: base
                 </div>
             </div>
         </div>
-
         <!-- Section 3: Politician Content Page -->
         <div class="col-md-8 custom-vfill-box d-none" id='section3-box'>
             <div class="custom-vfill custom-rounded" id="section3">
