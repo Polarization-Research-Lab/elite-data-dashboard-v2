@@ -1,6 +1,6 @@
 path {
     stroke: white;
-    fill: rgb(52, 53, 56) !important;
+    fill: rgb(123, 128, 140) !important;
 
     transition: fill .4s ease;
     transform-origin: center center;
@@ -22,9 +22,9 @@ path:hover {
 #details-box {
     box-shadow: 0px 7px 40px rgba(0, 0, 0, 0.7);
     opacity: 0%;
-    padding: 1rem;
+    padding: 10px;
     border-radius: 8px;
-    font-size: 24px;
+    font-size: 12px;
     position: fixed;
     color: white;
     font-family: "Poppins";

@@ -1,0 +1,78 @@
+    <div id='start' class='custom-rounded col-7 offset-5'>
+        <br>
+        <!-- <h1 class='text-center'>Leaderboards</h1> -->
+        <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
+            <div class="carousel-inner">
+<!--                 <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div> -->
+                <!-- Slides -->
+                <div class="carousel-inner">
+                    {% for category in site.data.carousel.categories %}
+                    {% assign categoryKey = category[0] %}
+
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <!-- Slide Content -->
+                        <div class="w-100 d-flex flex-column">
+                            <div class="w-100">
+                                <h2 class="text-center">Leaders: {{ site.data.carousel.category_labels[categoryKey] }}</h2>
+                            </div>
+
+                            <div class="row w-75 mx-auto">
+                                <!-- Left Column (Democrat) -->
+                                <div class="col-6">
+
+                                    <div class="row flex-column mt-2 p-2">
+                                        <div class="m-2 leg-title-card"><h4 class="text-center">Top Democrats</h4></div>
+                                        {% for legislator in category[1].dems%}
+                                        <div class="m-2 card leg-card hover-card custom-rounded d-flex flex-row align-items-center" data-bioguide_id="{{ legislator[0] }}" data-state="{{ legislator[1].state }}">
+                                            <div class="rank">{{ legislator[1].rank }}. </div>
+                                            <div class="col-4 my-auto">
+                                                <img src="assets/img/legislators/profile_images/{{ legislator[0] }}.jpg" class="card-img rounded-circle p-2 img-rep" alt="legislator" onerror="this.src = 'assets/img/avatar-default.svg'">
+                                            </div>
+                                            <div class="card-body col my-auto">
+                                                <p class="text-left text-bold">{{ legislator[1].first_name }} {{ legislator[1].last_name }}</p><p> ({{ legislator[1].percent }}%)</p>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <!-- Right Column (Republican) -->
+                                <div class="col-6">
+                                    <div class="row flex-column mt-2 p-2">
+                                        <div class="m-2 leg-title-card"><h4 class="text-center">Top Republicans</h4></div>
+                                        {% for legislator in category[1].reps %}
+                                        {% assign party = legislator[1].party | slice: 0, 1 %}
+                                        <div class="m-2 card leg-card hover-card custom-rounded d-flex flex-row align-items-center" data-bioguide_id="{{ legislator[0] }}" data-state="{{ legislator[1].state }}">
+                                            <div class="rank">{{ legislator[1].rank }}. </div>
+                                            <div class="col-4 my-auto">
+                                                <img src="assets/img/legislators/profile_images/{{ legislator[0] }}.jpg" class="card-img rounded-circle p-2 img-rep" alt="legislator" onerror="this.src = 'assets/img/avatar-default.svg'">
+                                            </div>
+                                            <div class="card-body col my-auto">
+                                                <p class="text-left text-bold">{{ legislator[1].first_name }} {{ legislator[1].last_name }}</p><p>({{ legislator[1].percent }}%)</p>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <!-- Control buttons moved to the bottom -->
+                <div class="d-flex justify-content-between mt-3">
+                    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>

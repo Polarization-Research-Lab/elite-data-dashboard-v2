@@ -1,25 +1,17 @@
-// Load the state-legislators JSON
-fetch("assets/data/state-legislators.json")
-    .then(response => response.json())
-    .then(data => {
-        stateLegislators = data;
-        // Continue with the rest of the code...
-
-        // Load the legislators-meta JSON
-        fetch("assets/data/legislators-meta.json")
-            .then(response => response.json())
-            .then(data => {
-                legislatorsMeta = data;
-                // Continue with the rest of the code...
-                // stateSelect.selectedIndex = 3;
-                // const changeEvent = new Event("change");
-                // stateSelect.dispatchEvent(changeEvent);
-            });
-    });
-
-D = document
-
 document.addEventListener("DOMContentLoaded", function() {
+    // Load the state-legislators JSON
+    fetch("assets/data/state-legislators.json")
+        .then(response => response.json())
+        .then(data => {
+            stateLegislators = data;
+            fetch("assets/data/legislators-meta.json")
+                .then(response => response.json())
+                .then(data => {
+                    legislatorsMeta = data;
+                });
+        });
+
+    D = document
 
     const stateSelect = document.getElementById("stateSelect");
 
@@ -46,8 +38,9 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("start").classList.add("animate__animated", "animate__fadeOutRight");
         // section3.classList.add("animate__animated", "animate__slideOutRight");
 
-        updateSection2()
+        sect2addin()
     });
+
     document.getElementById("start").addEventListener("animationend", function() {
         if (event.animationName === "fadeOutRight") {
             this.classList.add("d-none")
@@ -71,7 +64,6 @@ document.addEventListener("DOMContentLoaded", function() {
         // Show Section 3 and fade it in
         if (section3Box.classList.contains('d-none')) {
 
-            console.log('moved')
             section3Box.classList.remove("d-none");
             section3.classList.remove("d-none");
             section3.classList.remove("animate__slideOutRight");
@@ -127,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
 
-    function updateSection2() {
+    function sect2addin() {
         const stateSelect = document.getElementById("stateSelect");
         const senList = document.getElementById("sen-card-box");
         const repList = document.getElementById("representatives-list");
@@ -145,10 +137,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // throw 'hey'
         // Iterate through bioguideIds
+        // console.log(legislatorsMeta)
         bioguideIds.forEach(bioguideId => {
             const legislator = legislatorsMeta[bioguideId];
-
-            if (legislator['type'] === 'Senator') {
+            if (legislator['type'] === 'sen') {
                 const senCard = document.createElement("div");
                 senCard.classList.add("col-6", "sen-card-parent");
                 senCard.innerHTML = `
@@ -156,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         <div class="align-items-center d-flex flex-column">
                             <img src="assets/img/legislators/profile_images/${bioguideId}.jpg" class="card-img-top rounded-circle mx-auto mt-3 img-sen" alt="senator" onerror="this.src = 'assets/img/avatar-default.svg'"">
                             <div class="card-body">
-                                <h5 class="card-title">${legislator['name']}</h5>
+                                <h5 class="card-title">${legislator['name']} (${legislator['party'][0]})</h5>
                             </div>
                         </div>
                     </div>
@@ -164,7 +156,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 senCard.addEventListener("click", function() { sect3addin(bioguideId) });
                 senList.appendChild(senCard);
 
-            } else if (legislator['type'] === 'Representative') {
+            } else if (legislator['type'] === 'rep') {
                 const repCard = document.createElement("div");
                 repCard.classList.add("my-2");
                 repCard.innerHTML = `
@@ -173,7 +165,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             <img src="assets/img/legislators/profile_images/${bioguideId}.jpg" class="card-img rounded-circle p-2 img-rep" alt="Representative" onerror="this.src = 'assets/img/avatar-default.svg'">
                         </div>
                         <div class="card-body col my-auto">
-                            <p class="text-left">${legislator['name']}</p>
+                            <p class="text-left">${legislator['name']} (${legislator['party'][0]}, ${legislator['state']}-${legislator['district']})</p>
                         </div>
                     </div>
                 `;
@@ -257,7 +249,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
             // Update the innerHTML of the span
             const parentElement = chart.canvas.closest('.category-guage');
-            console.log(parentElement)
 
             // Find the closest span with class "place" within the parent element
             const spanElement = parentElement.querySelector('span.place');
@@ -271,4 +262,17 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
 
+    // Loop through each element and add the onclick function
+    legCards.forEach((element) => {
+      const bioguide_id = element.getAttribute('data-bioguide_id');
+      element.addEventListener('click', function() {
+
+        // Make state select based on this.getAttribute('data-state')
+        stateSelect.value = this.getAttribute('data-state');
+        stateSelect.dispatchEvent(new Event('change'));
+
+        sect2addin();
+        sect3addin(bioguide_id);
+      });
+    });
 });

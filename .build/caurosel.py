@@ -25,11 +25,14 @@ s = {
 
 sources = list(s.keys())
 source_labels = list(s.values())
-key_columns = [
-    "insult",
-    "policy",
-    "foreign_policy",
-]
+
+k = {
+    "insult": 'Insult',
+    "policy": 'Policy',
+    "foreign_policy": "Foreign Policy",
+}
+key_columns = list(k.keys())
+key_column_labels = list(k.values())
 
 ## Connect to origianl database
 conn = ibis.mysql.connect(
@@ -78,7 +81,7 @@ for column in key_columns:
     for idx, (_, politician) in enumerate(top_politicians.iterrows()):
         bioguide_id = politician['bioguide_id']
 
-        l = legislators.filter(legislators['bioguide_id'] == bioguide_id)[['first_name', 'last_name', 'party']].execute()
+        l = legislators.filter(legislators['bioguide_id'] == bioguide_id)[['first_name', 'last_name', 'party', 'state']].execute()
 
         # Filter rows with a value of 1 in the original category column
         politician_rows = classif.filter((classif[column] == 1) & (classif['bioguide_id'] == bioguide_id))[key_columns + ['text']].execute()
@@ -90,6 +93,7 @@ for column in key_columns:
             'percent': round(result[result['bioguide_id'] == bioguide_id][f'{column}_mean'].values[0] * 100, 2),
             'party': l['party'].loc[0],
             'rank': str(int(idx+1)),
+            'state': l['state'].loc[0],
         }
 
         categories_dem[column][bioguide_id] = data
@@ -105,7 +109,7 @@ for column in key_columns:
     for idx, (_, politician) in enumerate(top_politicians.iterrows()):
         bioguide_id = politician['bioguide_id']
 
-        l = legislators.filter(legislators['bioguide_id'] == bioguide_id)[['first_name', 'last_name', 'party']].execute()
+        l = legislators.filter(legislators['bioguide_id'] == bioguide_id)[['first_name', 'last_name', 'party', 'state']].execute()
 
         # Filter rows with a value of 1 in the original category column
         politician_rows = classif.filter((classif[column] == 1) & (classif['bioguide_id'] == bioguide_id))[key_columns + ['text']].execute()
@@ -117,20 +121,26 @@ for column in key_columns:
             'percent': round(result[result['bioguide_id'] == bioguide_id][f'{column}_mean'].values[0] * 100, 2),
             'party': l['party'].loc[0],
             'rank': str(int(idx+1)),
+            'state': l['state'].loc[0],
         }
 
         categories_rep[column][bioguide_id] = data
 
-alldata = {}
+alldata = {'categories': {}}
 for category in categories:
-    alldata[category] = {
+    alldata['categories'][category] = {
         'dems': categories_dem[category],
         'reps': categories_rep[category],
-        'category_labels': source_labels,
     }
 
+alldata['source_labels'] = s
+alldata['category_labels'] = k
 
 
 with open('../_data/carousel.json', 'w') as json_file:
     json.dump(alldata, json_file)
+
+
+
+
 

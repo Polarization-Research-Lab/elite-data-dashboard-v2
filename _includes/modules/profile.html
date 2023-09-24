@@ -1,3 +1,7 @@
+<div class="detail">
+    <h2 class='text-center mb-0'>What [Representative/Senator] Says</h2>
+</div>
+
 <!-- Politician profile card -->
 <div class="col-4">
     <div class="h-50">
@@ -18,20 +22,21 @@
     <div class="h-50">
     </div>
 </div>
+
 <div class="col-8 h-100">
+
     <div class="h-100 d-flex flex-column">
+
         <div class="overflow-auto flex-grow-1 my-0" id="s3-plots">
 
-            <h1 class='text-center mb-5'>Civility Analysis</h1>
 
-            <h3 class='text-center mb-0'>Discourse Profile</h3>
             <div class='' id='discourse'>
                 <div class='' id='discourse-rose-div'>
                     <canvas id='discourse-rose' class='dynamic-chart' data-script="{{ site.baseurl }}/assets/modules/charts/rose.js"></canvas>
                 </div>
             </div>
 
-            <h2 class='text-center mt-5'>Rankings</h2>
+            <h5 class='text-center mt-5 sen-card-box-title'>How does what [title and name] says compare other elected officials?</h5>
             <div class="w-100 row justify-content-center">
             {% assign index = 0 %}
             {% for category in site.data.meta.categories %}
@@ -45,7 +50,8 @@
             {% assign index = index | plus: 1 %}
             {% endfor %}
             </div>
-
+            <h5 class='text-center mt-5 sen-card-box-title'>How effective is [title and name]</h5>
+            <h5 class='text-center mt-5 sen-card-box-title'>How liberal or conserative is [title and name]</h5>
 
         </div>
     </div>
