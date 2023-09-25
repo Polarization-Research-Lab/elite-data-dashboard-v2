@@ -50,20 +50,18 @@
                 </div>
 
                 <div class="w-100 row justify-content-center">
-                    <script src="https://unpkg.com/chartjs-gauge@0.3.0/dist/chartjs-gauge.js"></script>
-                    {% comment %}
                     {% assign index = 0 %}
                     {% for category in site.data.meta.categories %}
-                        <div class='col-4 category-guage' id=''>
+                        <div class='col-md-4 category-guage' id=''>
                             <div class='' id=''>
                                 <canvas id='gauge-{{category}}' class='dynamic-chart' data-script="{{ site.baseurl }}/assets/modules/charts/gauge.js" data-gauge="50" data-max='100' data-color='green'></canvas>
                             </div>
-                            <h5 class="text-center"><span class="place"></span> in {{ site.data.meta.category_labels[index] }}</h5>
+                                <h5 class="text-center text-wrap"><span class="place"></span> in {{ site.data.meta.category_labels[index] }}</h5>
+                            <!-- <p></p> -->
                         </div>
 
                     {% assign index = index | plus: 1 %}
                     {% endfor %}
-                    {% endcomment %}
                 </div>
 
             </div>
@@ -77,4 +75,9 @@
 
         </div>
     </div>
+</div>
+<div class="container">
+  <h5 class="text-nowrap">This text won't wrap and will overflow if it's too long.</h5>
+  <h5 class="text-truncate">This text will be truncated with an ellipsis if it's too long.</h5>
+  <h5 class="text-wrap">This text will wrap within the container if it's too long.</h5>
 </div>
