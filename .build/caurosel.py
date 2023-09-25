@@ -27,9 +27,9 @@ sources = list(s.keys())
 source_labels = list(s.values())
 
 k = {
-    "insult": 'Insult',
-    "policy": 'Policy',
-    "foreign_policy": "Foreign Policy",
+    "insult": 'Use of Insults',
+    "policy": 'Discussion of Policy Issues',
+    "foreign_policy": "Discussion of Foreign Policy Issues",
 }
 key_columns = list(k.keys())
 key_column_labels = list(k.values())

@@ -27,7 +27,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const categories = ["insult", "blame", "credit_claiming", "compromise", "policy", "foreign_policy", "legislative_discussion"]
 
-
     // state select logic 
     stateSelect.addEventListener("change", function() {
         // Show Section 2 and fade it in from the left
@@ -217,48 +216,50 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     function buildProfile(data, bioguide_id) {
-        D.querySelector('#section3-pledge').innerHTML = 'No'
-        D.querySelector('#section3-chamber').innerHTML = (data['type'] === 'rep') ? 'Representative' : (data['type'] === 'sen') ? 'Senator' : ''
-        D.querySelector('#section3-name').innerHTML = `${data['first_name']} ${data['last_name']}`
-        D.querySelector('#section3-party').innerHTML = `(${data['party'][0]})`
+        // D.querySelector('#section3-pledge').innerHTML = 'No'
+        // D.querySelector('#section3-chamber').innerHTML = (data['type'] === 'rep') ? 'Representative' : (data['type'] === 'sen') ? 'Senator' : ''
+        // D.querySelector('#section3-name').innerHTML = `${data['first_name']} ${data['last_name']}`
+        // D.querySelector('#section3-party').innerHTML = `(${data['party'][0]})`
         // D.querySelector('#section3-serving-since').innerHTML = "some time" //data['']
-        D.querySelector('#avatar').src = `assets/img/legislators/profile_images/${bioguide_id}.jpg`
-        D.querySelector('#avatar').addEventListener('error', function() {
-            this.src = `assets/img/avatar-default.svg`
-        });
+        // D.querySelector('#avatar').src = `assets/img/legislators/profile_images/${bioguide_id}.jpg`
+        // D.querySelector('#avatar').addEventListener('error', function() {
+            // this.src = `assets/img/avatar-default.svg`
+        // });
 
         // update discourse rose
-        chart = charts[`discourse-rose`]
-        chart.data.datasets[0].data = categories.map(category => data['scorecard'][category]['percent']);
+        chart = charts[`discourse-bar`]
 
-        backgroundColors = charts['discourse-rose'].data.datasets[0].backgroundColor
+        chart.data.datasets[0].data = categories.map(category => Math.round(data['scorecard'][category]['percent'] * 1000) / 10);
+
+        backgroundColors = charts['discourse-bar'].data.datasets[0].backgroundColor
+        console.log(backgroundColors)
 
         chart.update()
 
-        // update cateogry plots
-        for (const [index, category] of categories.entries()) {
-            chart = charts[`gauge-${category}`]
-            chart.data.datasets[0].data = [data['scorecard'][category]['rank'] - 15, 30, 535 - data['scorecard'][category]['rank'] - 15]
-            chart.data.datasets[0].needleValue = data['scorecard'][category]['rank']
-            chart.data.datasets[0].backgroundColor = ['Grey', backgroundColors[index], 'Grey'];
-            chart.update()
+        // // update cateogry plots
+        // for (const [index, category] of categories.entries()) {
+        //     chart = charts[`gauge-${category}`]
+        //     chart.data.datasets[0].data = [data['scorecard'][category]['rank'] - 15, 30, 535 - data['scorecard'][category]['rank'] - 15]
+        //     chart.data.datasets[0].needleValue = data['scorecard'][category]['rank']
+        //     chart.data.datasets[0].backgroundColor = ['Grey', backgroundColors[index], 'Grey'];
+        //     chart.update()
 
-            const rank = data['scorecard'][category]['rank'];
-            const roundedRank = Math.round(rank);
-            const ordinalSuffix = getOrdinalSuffix(roundedRank);
+        //     const rank = data['scorecard'][category]['rank'];
+        //     const roundedRank = Math.round(rank);
+        //     const ordinalSuffix = getOrdinalSuffix(roundedRank);
 
-            // Update the innerHTML of the span
-            const parentElement = chart.canvas.closest('.category-guage');
+        //     // Update the innerHTML of the span
+        //     const parentElement = chart.canvas.closest('.category-guage');
 
-            // Find the closest span with class "place" within the parent element
-            const spanElement = parentElement.querySelector('span.place');
-            // Update the innerHTML of the found span
-            if (spanElement) {
-                spanElement.innerHTML = `${roundedRank}${ordinalSuffix}`;
-            }
+        //     // Find the closest span with class "place" within the parent element
+        //     const spanElement = parentElement.querySelector('span.place');
+        //     // Update the innerHTML of the found span
+        //     if (spanElement) {
+        //         spanElement.innerHTML = `${roundedRank}${ordinalSuffix}`;
+        //     }
 
-            // document.querySelector($GET CLOSEST SPAN WITH CLASS "PLACE"$).innerHTML = `${roundedRank}${ordinalSuffix}`;
-        }
+        //     // document.querySelector($GET CLOSEST SPAN WITH CLASS "PLACE"$).innerHTML = `${roundedRank}${ordinalSuffix}`;
+        // }
     }
 
 

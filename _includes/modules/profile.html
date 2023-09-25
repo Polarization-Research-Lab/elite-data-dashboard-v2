@@ -44,25 +44,31 @@
             <div class="maincard">
                 <div class="small">Overall | In Congress | On Twitter/X | Press Releases/Newsletters | In online ads</div>
                 <div class='' id='discourse'>
-                    <div class='' id='discourse-rose-div'>
-                        <canvas id='discourse-rose' class='dynamic-chart' data-script="{{ site.baseurl }}/assets/modules/charts/rose.js"></canvas>
+                    <div class='' id='discourse-bar-div'>
+                        <canvas id='discourse-bar' class='dynamic-chart' data-script="{{ site.baseurl }}/assets/modules/charts/discourse-bar.js"></canvas>
                     </div>
                 </div>
-            </div>
 
-            <div class="w-100 row justify-content-center">
-            {% assign index = 0 %}
-            {% for category in site.data.meta.categories %}
-                <div class='col-4 category-guage' id=''>
-                    <div class='' id=''>
-                        <canvas id='gauge-{{category}}' class='dynamic-chart' data-script="{{ site.baseurl }}/assets/modules/charts/gauge.js" data-gauge="50" data-max='100' data-color='green'></canvas>
-                    </div>
-                    <h5 class="text-center"><span class="place"></span> in {{ site.data.meta.category_labels[index] }}</h5>
+                <div class="w-100 row justify-content-center">
+                    <script src="https://unpkg.com/chartjs-gauge@0.3.0/dist/chartjs-gauge.js"></script>
+                    {% comment %}
+                    {% assign index = 0 %}
+                    {% for category in site.data.meta.categories %}
+                        <div class='col-4 category-guage' id=''>
+                            <div class='' id=''>
+                                <canvas id='gauge-{{category}}' class='dynamic-chart' data-script="{{ site.baseurl }}/assets/modules/charts/gauge.js" data-gauge="50" data-max='100' data-color='green'></canvas>
+                            </div>
+                            <h5 class="text-center"><span class="place"></span> in {{ site.data.meta.category_labels[index] }}</h5>
+                        </div>
+
+                    {% assign index = index | plus: 1 %}
+                    {% endfor %}
+                    {% endcomment %}
                 </div>
 
-            {% assign index = index | plus: 1 %}
-            {% endfor %}
             </div>
+                
+
             <h5 class='mt-5 profile-card-box-title'>How effective is [title and name]</h5>
             <div class="maincard"></div>
 
