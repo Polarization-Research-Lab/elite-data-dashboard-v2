@@ -1,6 +1,6 @@
-<div class="detail">
-    <h2 class='text-center mb-0'>What [Representative/Senator] Says</h2>
-</div>
+
+    <h2 class='title'>[Representative/Senator Name]'s Profile</h2>
+
 
 <!-- Politician profile card -->
 <div class="col-4">
@@ -8,10 +8,21 @@
         <div class="card" id='pol-card'>
             <img src="{{ site.baseurl }}/assets/img/avatar-default.svg" id='avatar' class="card-img-top rounded-circle mx-auto mt-3 img-sen" alt="Politician" >
             <!-- SOCIAL MEDIA LINKS! Gov page; twitter; facebook; instagram; tiktok; whatever we get from our core table -->
-            <div class="card-body text-center">
-                <h5 class="card-title"><span id="section3-chamber">Rep / Sen</span> <span id="section3-name">Name</span> <span id="section3-party">(P)</span></h5>
+            <div class="card-body">
+            
+                <div class="small">
+                    <p>[Democrat/Republican/Independent] from Georgia</p>
+                    <!-- If house -->
+                    <p>District [N]</p>
+                    <!-- end if house -->
+                    <p>First elected to the [House/Senate] in YYYY</p>
+                    <p>Committees: list of committees</p>
+                    <p>Offical website</p>
+                    <p>Campagin website</p>
+                    <p>Twitter/X Facebook YouTube</p>
+                </div>
                 <!-- <p class="card-text">Serving since <span id="section3-serving-since"></span></p> -->
-                <p class="card-text">Pledge of Civility: <span id="section3-pledge"></span></p>
+                <!-- <p class="card-text">Pledge of Civility: <span id="section3-pledge"></span></p> -->
                 <br>
                 <!-- <div id='ideology'> -->
                     <!-- <h2>Ideology</h2> -->
@@ -29,14 +40,16 @@
 
         <div class="overflow-auto flex-grow-1 my-0" id="s3-plots">
 
-
-            <div class='' id='discourse'>
-                <div class='' id='discourse-rose-div'>
-                    <canvas id='discourse-rose' class='dynamic-chart' data-script="{{ site.baseurl }}/assets/modules/charts/rose.js"></canvas>
+            <h5 class='mt-5 profile-card-box-title'>What [title and name] says</h5>
+            <div class="maincard">
+                <div class="small">Overall | In Congress | On Twitter/X | Press Releases/Newsletters | In online ads</div>
+                <div class='' id='discourse'>
+                    <div class='' id='discourse-rose-div'>
+                        <canvas id='discourse-rose' class='dynamic-chart' data-script="{{ site.baseurl }}/assets/modules/charts/rose.js"></canvas>
+                    </div>
                 </div>
             </div>
 
-            <h5 class='text-center mt-5 sen-card-box-title'>How does what [title and name] says compare other elected officials?</h5>
             <div class="w-100 row justify-content-center">
             {% assign index = 0 %}
             {% for category in site.data.meta.categories %}
@@ -50,8 +63,11 @@
             {% assign index = index | plus: 1 %}
             {% endfor %}
             </div>
-            <h5 class='text-center mt-5 sen-card-box-title'>How effective is [title and name]</h5>
-            <h5 class='text-center mt-5 sen-card-box-title'>How liberal or conserative is [title and name]</h5>
+            <h5 class='mt-5 profile-card-box-title'>How effective is [title and name]</h5>
+            <div class="maincard"></div>
+
+            <h5 class='mt-5 profile-card-box-title'>How liberal or conserative is [title and name]</h5>
+            <div class="maincard"></div>
 
         </div>
     </div>

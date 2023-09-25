@@ -142,14 +142,14 @@ document.addEventListener("DOMContentLoaded", function() {
             const legislator = legislatorsMeta[bioguideId];
             if (legislator['type'] === 'sen') {
                 const senCard = document.createElement("div");
-                senCard.classList.add("col-6", "sen-card-parent");
+                senCard.classList.add("my-2");
                 senCard.innerHTML = `
-                    <div class="card sen-card hover-card text-center custom-rounded px-2 h-100">
-                        <div class="align-items-center d-flex flex-column">
-                            <img src="assets/img/legislators/profile_images/${bioguideId}.jpg" class="card-img-top rounded-circle mx-auto mt-3 img-sen" alt="senator" onerror="this.src = 'assets/img/avatar-default.svg'"">
-                            <div class="card-body">
-                                <h5 class="card-title">${legislator['name']} (${legislator['party'][0]})</h5>
-                            </div>
+                    <div class="card sen-card rep-card hover-card custom-rounded d-flex flex-row align-items-center">
+                        <div class="col-4 my-auto px-4">
+                            <img src="assets/img/legislators/profile_images/${bioguideId}.jpg" class="card-img rounded-circle p-2 img-rep" alt="senator" onerror="this.src = 'assets/img/avatar-default.svg'"">
+                        </div>
+                        <div class="card-body col my-auto">
+                            <p class="text-left">${legislator['name']} (${legislator['party'][0]})</p>
                         </div>
                     </div>
                 `;
