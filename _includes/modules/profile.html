@@ -1,14 +1,11 @@
-
 <h2 class='title'><span id='profile-chamber'></span> <span id='profile-name'></span>'s Profile</h2>
-
 <!-- Politician profile card -->
 <div class="col-3 bg-transparent">
     <div class="h-50 bg-transparent">
         <div class="card bg-transparent" id='pol-card'>
-            <img src="{{ site.baseurl }}/assets/img/avatar-default.svg" id='avatar' class="card-img-top rounded-circle mx-auto mt-3 img-sen" alt="Politician" >
+            <img src="{{ site.baseurl }}/assets/img/avatar-default.svg" id='avatar' class="card-img-top rounded-circle mx-auto mt-3 img-sen" alt="Politician">
             <!-- SOCIAL MEDIA LINKS! Gov page; twitter; facebook; instagram; tiktok; whatever we get from our core table -->
             <div class="card-body">
-            
                 <div class="small">
                     <p><span id='profile-party'></span> from <span id='profile-state'></span></p>
                     <!-- If house -->
@@ -25,7 +22,7 @@
                 <!-- <p class="card-text">Pledge of Civility: <span id="section3-pledge"></span></p> -->
                 <br>
                 <!-- <div id='ideology'> -->
-                    <!-- <h2>Ideology</h2> -->
+                <!-- <h2>Ideology</h2> -->
                 <!-- </div> -->
             </div>
         </div>
@@ -33,13 +30,9 @@
     <div class="h-50">
     </div>
 </div>
-
 <div class="col-9 h-100">
-
     <div class="h-100 d-flex flex-column">
-
         <div class="overflow-auto flex-grow-1 my-0" id="s3-plots">
-
             <h5 class='mt-5 profile-card-box-title'>What do they talk about?</h5>
             <div class="maincard">
                 <div class="small">Overall | In Congress | On Twitter/X | Press Releases/Newsletters | In online ads</div>
@@ -58,15 +51,20 @@
                 <div class="mt-4 w-100 row justify-content-center">
                     {% assign index = 0 %}
                     {% for category in site.data.meta.categories %}
-                    <div class='row col-md-12 hover-card category-card position-relative' id='profile-card-category-{{category}}'>
-                        <div class='col-md-3 category-guage align-items-start' id=''>
-                            <div class='' id=''>
-                                <canvas id='gauge-{{category}}' class='dynamic-chart' data-script="{{ site.baseurl }}/assets/modules/charts/gauge.js" data-gauge="50" data-max='100' data-color='green'></canvas>
+                    <div class='row col-md-12 hover-card category-card align-items-middle' id='profile-card-category-{{category}}'>
+                        <div class='col-md-3 category-guage my-auto' id=''>
+                            <div class="w-100" id="">
+                                <canvas id="gauge-{{category}}" class="dynamic-chart w-100 h-100" data-script="{{ site.baseurl }}/assets/modules/charts/gauge.js" data-gauge="50" data-max="{{ site.data.meta.max_politicians }}" data-color="green"></canvas>
                             </div>
-                            <h5 class="text-center text-wrap"><span class="place"></span><br>{{ site.data.meta.category_labels[index] }}</h5>
+                            <div class="w-100 mx-auto mt-0 d-flex justify-content-between">
+                                <div class="text-secondary small">1</div>
+                                <div class="text-secondary small">535</div>
+                            </div>
+                            <div class='w-100 mx-auto mt-0'>
+                                <h5 class="text-center text-wrap mt-0"><span class="place"></span><br>{{ site.data.meta.category_labels[index] }}</h5>
+                            </div>
                         </div>
-
-                        <div class='col-md-9 align-items-end' id=''>
+                        <div class='col-md-9 align-items-end my-auto' id=''>
                             <div class='' id=''>
                                 <canvas id='source-bar-{{category}}' class='dynamic-chart' data-script="{{ site.baseurl }}/assets/modules/charts/source-bar.js"></canvas>
                             </div>
@@ -74,11 +72,16 @@
                         <div class='position-relative recent-examples w-100 px-4 mb-4' id='recent-examples-{{category}}'>
                             <br>
                             <div class='w-100 bg-light bg-gradient rounded px-4 mt-2'>
-                                <h5 class='w-100 text-center mt-2 bg-light bg-gradient'>Recent Example</h5>
-                                <p id='profile-quote-info-{{ category }}'></p>
-                                <blockquote id='profile-quote-{{ category }}'>
-                                </blockquote>
-                                <!-- <a href='' id='profile-quote-source-{{categpry}}'>source</a> -->
+                                <figure>
+                                    <br>
+                                    <h5 class='w-100 text-center mt-2 bg-light bg-gradient'>Recent Example</h5>
+                                    <blockquote class="blockquote" id='profile-quote-{{ category }}'>
+                                    </blockquote>
+                                    <figcaption class="blockquote-footer">
+                                        <cite id='profile-quote-info-{{ category }}'></cite>
+                                    </figcaption>
+                                </figure>
+                                <!-- <a href='' id='profile-quote-source-{{category}}'>source</a> -->
                                 <br>
                                 <br>
                             </div>
@@ -87,14 +90,9 @@
                     {% assign index = index | plus: 1 %}
                     {% endfor %}
                 </div>
-
             </div>
-                
-
             <h5 class='mt-5 profile-card-box-title'>How effective they are</h5>
-                
             <div class="maincard"><img id='efficacy-img' src=''></div>
-
             <h5 class='mt-5 profile-card-box-title'>How liberal or conserative they are</h5>
             <div class="maincard"></div>
             <br>
@@ -105,4 +103,3 @@
         </div>
     </div>
 </div>
-

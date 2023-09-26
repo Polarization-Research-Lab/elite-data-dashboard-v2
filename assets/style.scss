@@ -223,20 +223,20 @@ $header-height: 50px;
     height: 49px;
     border-radius: 50%;
     background-color: rgba(0, 0, 0, .2);
-    color: #fff;
-    font-size: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    border: none;
+    // color: #fff;
+    // font-size: 20px;
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+    // cursor: pointer;
+    // border: none;
     transition: background-color 0.3s, transform 0.3s;
 }
 
 #closeSection3:hover {
     background-color: rgba(0, 0, 0, .6);
     transform: scale(1.1);
-    font-size: 25px;
+    // font-size: 25px;
 }
 
 #pol-card {
@@ -553,8 +553,8 @@ mb-4{
 }
 
 .maincard{
-    border: 1px solid #1b365d;
-    padding:10px;
+    // border: 1px solid #1b365d;
+    padding:20px;
     margin-bottom: 20px !important;
     background-color: #fff;
 }

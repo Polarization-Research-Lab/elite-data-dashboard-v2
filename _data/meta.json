@@ -14,7 +14,17 @@
 		"credit_claiming",
 		"compromise",
 		"policy",		
-		"foreign_policy",
 		"legislative_discussion",
+		"foreign_policy",
 	],
+	"category_label_map": {
+		"insult": "Insulting Language",
+		"blame": "Blame and Accusations",
+		"credit_claiming": "Credit Claiming",
+		"compromise": "Bipartisanship and Compromise",
+		"policy": "Policy Discussion",
+		"legislative_discussion": "Legislative Discussion",
+		"foreign_policy": "Foreign Policy",
+	},
+	"max_politicians": 535,
 }

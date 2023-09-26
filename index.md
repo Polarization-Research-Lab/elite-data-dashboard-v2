@@ -93,7 +93,7 @@ layout: base
             <div class="custom-vfill " id="section3">
                 <div class='row h-100'>
                     {%- include modules/profile.html -%}
-                    <button class="close-button m-2" id="closeSection3">x</button>
+                    <button class="close-button m-2 btn-close" aria-label="Close" id="closeSection3"></button>
                 </div>
             </div>
         </div>
