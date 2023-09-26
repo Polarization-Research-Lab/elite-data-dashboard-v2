@@ -40,7 +40,7 @@ layout: base
                         <div class="title-card">
                         <p>Do your representatives focus on <strong>policy and solutions</strong> or <strong>aggravating political divides</strong>?</p>
                         <ul>
-                        <li>Learn what your representartives talk about</li>
+                        <li>Learn what your representatives talk about</li>
                         <li>Learn how extreme they are</li>
                         <li>Learn how effective they are passing legislation</li>
                         </ul>

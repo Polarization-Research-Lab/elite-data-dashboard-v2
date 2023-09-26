@@ -240,7 +240,7 @@ $header-height: 50px;
 }
 
 #pol-card {
-    background-color: rgba(0, 0, 0, 0);
+    // background-color: rgba(0, 0, 0, 0);
     border: none;
 }
 
@@ -412,7 +412,7 @@ h1, h2 {
 }
 
 #section3-box{
-    background-color: #fff !important;
+    // background-color: #fff !important;
 
 }
 
@@ -556,6 +556,7 @@ mb-4{
     border: 1px solid #1b365d;
     padding:10px;
     margin-bottom: 20px !important;
+    background-color: #fff;
 }
 .small {
     font-size: .75rem;
@@ -568,4 +569,20 @@ mb-4{
 }
 .title h2{
     font-size: 2rem;
+}
+
+.recent-examples {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  transition: height 1.3s ease;
+}
+
+.slide-in {
+  height: auto;
+  transition: height 1.3s ease;
+}
+
+.category-card {
+  cursor: pointer; /* Add cursor pointer for category-card */
 }

@@ -3,8 +3,6 @@ function build () {
     document.currentScript.parentNode.id
   ).getContext('2d')
 
-  sources = JSON.parse(document.currentScript.getAttribute('data-sources'))
-
   const chart = new Chart(
     ctx,
     {
@@ -14,12 +12,12 @@ function build () {
         datasets: [
           {
             label: '_',
-            data: sources,
+            data: [1,1,1,1],
           }
         ]
       },
       options: {
-        responsive: true,
+        // responsive: true,
         maintainAspectRatio: false,
         scales: {
           y: {
@@ -34,7 +32,7 @@ function build () {
                   }
               },
             },
-            // max: 100,
+            max: 100,
             min: 0,
             // suggestedMax: 100,
             maxTicksLimit: 10,
@@ -54,6 +52,7 @@ function build () {
             text: '...'
           },
           tooltip: {
+            enabled: false,
             callbacks: {
                 label: function(context) {
                     return context.formattedValue + '%'
@@ -65,6 +64,7 @@ function build () {
 
     }
   )
+  charts[document.currentScript.parentNode.id] = chart
 }
 
 build()

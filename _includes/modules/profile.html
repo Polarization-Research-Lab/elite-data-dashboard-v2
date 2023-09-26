@@ -1,25 +1,25 @@
 
-    <h2 class='title'>[Representative/Senator Name]'s Profile</h2>
-
+<h2 class='title'><span id='profile-chamber'></span> <span id='profile-name'></span>'s Profile</h2>
 
 <!-- Politician profile card -->
-<div class="col-4">
-    <div class="h-50">
-        <div class="card" id='pol-card'>
+<div class="col-3 bg-transparent">
+    <div class="h-50 bg-transparent">
+        <div class="card bg-transparent" id='pol-card'>
             <img src="{{ site.baseurl }}/assets/img/avatar-default.svg" id='avatar' class="card-img-top rounded-circle mx-auto mt-3 img-sen" alt="Politician" >
             <!-- SOCIAL MEDIA LINKS! Gov page; twitter; facebook; instagram; tiktok; whatever we get from our core table -->
             <div class="card-body">
             
                 <div class="small">
-                    <p>[Democrat/Republican/Independent] from Georgia</p>
+                    <p><span id='profile-party'></span> from <span id='profile-state'></span></p>
                     <!-- If house -->
-                    <p>District [N]</p>
+                    <p><span id='profile-district'></span></p>
                     <!-- end if house -->
-                    <p>First elected to the [House/Senate] in YYYY</p>
-                    <p>Committees: list of committees</p>
-                    <p>Offical website</p>
-                    <p>Campagin website</p>
-                    <p>Twitter/X Facebook YouTube</p>
+                    <!-- <p>First elected to the [House/Senate] in YYYY</p> -->
+                    <!-- <p>Committees: list of committees</p> -->
+                    <!-- <p>Offical website</p> -->
+                    <!-- <p>Campagin website</p> -->
+                    <!-- <p>Twitter/X Facebook YouTube</p> -->
+                    <!-- gov icon | web icon | twitter | facebook | youtube -->
                 </div>
                 <!-- <p class="card-text">Serving since <span id="section3-serving-since"></span></p> -->
                 <!-- <p class="card-text">Pledge of Civility: <span id="section3-pledge"></span></p> -->
@@ -34,32 +34,56 @@
     </div>
 </div>
 
-<div class="col-8 h-100">
+<div class="col-9 h-100">
 
     <div class="h-100 d-flex flex-column">
 
         <div class="overflow-auto flex-grow-1 my-0" id="s3-plots">
 
-            <h5 class='mt-5 profile-card-box-title'>What [title and name] says</h5>
+            <h5 class='mt-5 profile-card-box-title'>What do they talk about?</h5>
             <div class="maincard">
                 <div class="small">Overall | In Congress | On Twitter/X | Press Releases/Newsletters | In online ads</div>
-                <div class='' id='discourse'>
-                    <div class='' id='discourse-bar-div'>
+                <div class='row' id='discourse'>
+                    <div class='col-12' id='discourse-bar-div'>
                         <canvas id='discourse-bar' class='dynamic-chart' data-script="{{ site.baseurl }}/assets/modules/charts/discourse-bar.js"></canvas>
                     </div>
+                    {% comment %}
+                    <!-- in the future -->
+                    <div class='col-8' id='discourse-pie-source-div'>
+                        <canvas id='discourse-pie-source' class='dynamic-chart' data-script="{{ site.baseurl }}/assets/modules/charts/discourse-pie-source.js"></canvas>
+                    </div>
+                    {% endcomment %}
                 </div>
-
-                <div class="w-100 row justify-content-center">
+                <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+                <div class="mt-4 w-100 row justify-content-center">
                     {% assign index = 0 %}
                     {% for category in site.data.meta.categories %}
-                        <div class='col-md-4 category-guage' id=''>
+                    <div class='row col-md-12 hover-card category-card position-relative' id='profile-card-category-{{category}}'>
+                        <div class='col-md-3 category-guage align-items-start' id=''>
                             <div class='' id=''>
                                 <canvas id='gauge-{{category}}' class='dynamic-chart' data-script="{{ site.baseurl }}/assets/modules/charts/gauge.js" data-gauge="50" data-max='100' data-color='green'></canvas>
                             </div>
-                                <h5 class="text-center text-wrap"><span class="place"></span> in {{ site.data.meta.category_labels[index] }}</h5>
-                            <!-- <p></p> -->
+                            <h5 class="text-center text-wrap"><span class="place"></span><br>{{ site.data.meta.category_labels[index] }}</h5>
                         </div>
 
+                        <div class='col-md-9 align-items-end' id=''>
+                            <div class='' id=''>
+                                <canvas id='source-bar-{{category}}' class='dynamic-chart' data-script="{{ site.baseurl }}/assets/modules/charts/source-bar.js"></canvas>
+                            </div>
+                        </div>
+                        <div class='position-relative recent-examples w-100 px-4 mb-4' id='recent-examples-{{category}}'>
+                            <br>
+                            <div class='w-100 bg-light bg-gradient rounded px-4 mt-2'>
+                                <h5 class='w-100 text-center mt-2 bg-light bg-gradient'>Recent Example</h5>
+                                <p id='profile-quote-info-{{ category }}'></p>
+                                <blockquote id='profile-quote-{{ category }}'>
+                                </blockquote>
+                                <!-- <a href='' id='profile-quote-source-{{categpry}}'>source</a> -->
+                                <br>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
                     {% assign index = index | plus: 1 %}
                     {% endfor %}
                 </div>
@@ -67,17 +91,18 @@
             </div>
                 
 
-            <h5 class='mt-5 profile-card-box-title'>How effective is [title and name]</h5>
-            <div class="maincard"></div>
+            <h5 class='mt-5 profile-card-box-title'>How effective they are</h5>
+                
+            <div class="maincard"><img id='efficacy-img' src=''></div>
 
-            <h5 class='mt-5 profile-card-box-title'>How liberal or conserative is [title and name]</h5>
+            <h5 class='mt-5 profile-card-box-title'>How liberal or conserative they are</h5>
             <div class="maincard"></div>
-
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
         </div>
     </div>
 </div>
-<div class="container">
-  <h5 class="text-nowrap">This text won't wrap and will overflow if it's too long.</h5>
-  <h5 class="text-truncate">This text will be truncated with an ellipsis if it's too long.</h5>
-  <h5 class="text-wrap">This text will wrap within the container if it's too long.</h5>
-</div>
+

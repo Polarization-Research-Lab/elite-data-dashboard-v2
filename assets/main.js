@@ -176,7 +176,7 @@ document.addEventListener("DOMContentLoaded", function() {
         senatorCards.forEach(function(card) {
             card.addEventListener("click", sect3addin);
         })
-        
+
         // Sort based on last name (chatgpt is a genius)
         // Step 1: Collect all div elements inside repList
         const divs = Array.from(repList.querySelectorAll('div.my-2'));
@@ -214,17 +214,22 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-
+    // THIS NEEDS TO BE TEMPLATED IN!
     function buildProfile(data, bioguide_id) {
-        // D.querySelector('#section3-pledge').innerHTML = 'No'
-        // D.querySelector('#section3-chamber').innerHTML = (data['type'] === 'rep') ? 'Representative' : (data['type'] === 'sen') ? 'Senator' : ''
-        // D.querySelector('#section3-name').innerHTML = `${data['first_name']} ${data['last_name']}`
-        // D.querySelector('#section3-party').innerHTML = `(${data['party'][0]})`
-        // D.querySelector('#section3-serving-since').innerHTML = "some time" //data['']
-        // D.querySelector('#avatar').src = `assets/img/legislators/profile_images/${bioguide_id}.jpg`
-        // D.querySelector('#avatar').addEventListener('error', function() {
-            // this.src = `assets/img/avatar-default.svg`
-        // });
+        D.querySelector('#profile-name').innerHTML = `${data['first_name']} ${data['last_name']}`
+        // D.querySelector('#profile-pledge').innerHTML = 'No'
+        D.querySelector('#profile-chamber').innerHTML = (data['type'] === 'rep') ? 'Representative' : (data['type'] === 'sen') ? 'Senator' : ''
+        D.querySelector('#profile-party').innerHTML = `${data['party']}`
+        D.querySelector('#profile-state').innerHTML = `${data['state']}`
+        D.querySelector('#profile-district').innerHTML = data['district'] ? `District: ${data['district']}` : '';
+        // D.querySelector('#profile-serving-since').innerHTML = "some time" //data['']
+        D.querySelector('#avatar').src = `assets/img/legislators/profile_images/${bioguide_id}.jpg`
+        D.querySelector('#avatar').addEventListener('error', function() {
+            this.src = `assets/img/avatar-default.svg`
+        });
+        D.querySelector('#efficacy-img').src = `https://prlpublic.s3.amazonaws.com/pulse/toplines/${bioguide_id}.png`
+
+        // D.querySelector('#').innerHTML = data['']
 
         // update discourse rose
         chart = charts[`discourse-bar`]
@@ -237,10 +242,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // update cateogry plots
         for (const [index, category] of categories.entries()) {
+            category_div = document.getElementById(`profile-card-category-${category}`)
+
+            // # guage
             chart = charts[`gauge-${category}`]
-            chart.data.datasets[0].data = [data['scorecard'][category]['rank'] - 15, 30, 535 - data['scorecard'][category]['rank'] - 15]
+            chart.data.datasets[0].data = [data['scorecard'][category]['rank'] - 10, 20, 535 - data['scorecard'][category]['rank'] - 10]
             chart.data.datasets[0].needleValue = data['scorecard'][category]['rank']
-            chart.data.datasets[0].backgroundColor = ['Grey', backgroundColors[index], 'Grey'];
+            // chart.data.datasets[0].backgroundColor = ['rgb(190,190,190)', backgroundColors[index], 'rgb(190,190,190)'];
+            chart.data.datasets[0].backgroundColor = ['rgb(190,190,190)', 'black', 'rgb(190,190,190)'];
             chart.update()
 
             const rank = data['scorecard'][category]['rank'];
@@ -254,25 +263,63 @@ document.addEventListener("DOMContentLoaded", function() {
             const spanElement = parentElement.querySelector('span.place');
             // Update the innerHTML of the found span
             if (spanElement) {
-                spanElement.innerHTML = `${roundedRank}${ordinalSuffix}`;
+                spanElement.innerHTML = `<b>${roundedRank}</b><sup>${ordinalSuffix}</sup>`;
             }
 
+            // # Bar
+            chart = charts[`source-bar-${category}`]
+
+            chart.data.datasets[0].data = [
+                data['scorecard'][category]['sources']['tweets']['percent'] * 100,
+                data['scorecard'][category]['sources']['floor']['percent'] * 100,
+                data['scorecard'][category]['sources']['newsletters']['percent'] * 100,
+                data['scorecard'][category]['sources']['statements']['percent'] * 100,
+            ]
+            chart.update()
+
             // document.querySelector($GET CLOSEST SPAN WITH CLASS "PLACE"$).innerHTML = `${roundedRank}${ordinalSuffix}`;
+
+            // # Example
+            D.querySelector(`#profile-quote-info-${category}`).innerHTML = data['scorecard'][category]['example']['source']
+            D.querySelector(`#profile-quote-${category}`).innerHTML = data['scorecard'][category]['example']['text']
         }
     }
 
 
     // Loop through each element and add the onclick function
     legCards.forEach((element) => {
-      const bioguide_id = element.getAttribute('data-bioguide_id');
-      element.addEventListener('click', function() {
+        const bioguide_id = element.getAttribute('data-bioguide_id');
+        element.addEventListener('click', function() {
 
-        // Make state select based on this.getAttribute('data-state')
-        stateSelect.value = this.getAttribute('data-state');
-        stateSelect.dispatchEvent(new Event('change'));
+            // Make state select based on this.getAttribute('data-state')
+            stateSelect.value = this.getAttribute('data-state');
+            stateSelect.dispatchEvent(new Event('change'));
 
-        sect2addin();
-        sect3addin(bioguide_id);
-      });
+            sect2addin();
+            sect3addin(bioguide_id);
+        });
     });
+
+    const categoryCards = document.querySelectorAll(".category-card");
+
+    categoryCards.forEach(function(categoryCard) {
+        const recentExample = categoryCard.querySelector(".recent-examples");
+
+        // Initially hide recent-examples
+        recentExample.style.height = "0";
+        recentExample.style.overflow = "hidden";
+        recentExample.style.transition = "height 0.3s ease";
+
+        // Add click event listener
+        categoryCard.addEventListener("click", function() {
+            if (recentExample.style.height === "0px") {
+                // Show recent-examples with slide-in effect
+                recentExample.style.height = recentExample.scrollHeight + "px";
+            } else {
+                // Hide recent-examples with slide-out effect
+                recentExample.style.height = "0";
+            }
+        });
+    });
+
 });
