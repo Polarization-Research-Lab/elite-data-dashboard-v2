@@ -1,3 +1,6 @@
+# Collaboration Rules
+- dont overwrite bootstrap classes
+
 # ToDo
 - [ ] update landing display to be more interesting
 - [ ] add "..." animation to wait for images to load before showing legislators

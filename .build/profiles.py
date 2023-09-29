@@ -86,6 +86,13 @@ for idx, (_, politician) in enumerate(legislators.iterrows()):
         legislator_data['type'] = politician_meta['type'].iloc[0]
         legislator_data['twitter'] = politician_meta['twitter'].iloc[0]
         legislator_data['district'] = int(politician_meta['district'].iloc[0])
+        legislator_data['senate_class'] = int(politician_meta['senate_class'].iloc[0])
+        legislator_data['facebook'] = politician_meta['facebook'].iloc[0]
+        legislator_data['website'] = politician_meta['url'].iloc[0]
+        legislator_data['contact'] = politician_meta['contact_form'].iloc[0]
+        legislator_data['birthday'] = politician_meta['birthday'].iloc[0]
+        legislator_data['serving_congress_since'] = politician_meta['serving_congress_since'].iloc[0]
+        legislator_data['serving_current_chamber_since'] = politician_meta['serving_current_chamber_since'].iloc[0]
 
         # Initialize scorecard dictionary
         scorecard = {}
@@ -122,13 +129,16 @@ for idx, (_, politician) in enumerate(legislators.iterrows()):
                 scorecard[category]['sources'][source] = source_data
                  
         legislator_data['scorecard'] = scorecard
+
+
+        # Additional Info
+
         with open(f'../assets/data/legislators/{bioguide_id}.json','w') as file: 
             file.write(
                 json.dumps(legislator_data).replace('NaN','null')
             )
-    except:
-        print(f'---Failed to get data for {bioguide_id}---')
-
-
+    except Exception as e:
+        print(f'---Failed to get data for {bioguide_id}: {e}---')
+        # raise(e)
 
 

@@ -81,7 +81,7 @@ for column in key_columns:
     for idx, (_, politician) in enumerate(top_politicians.iterrows()):
         bioguide_id = politician['bioguide_id']
 
-        l = legislators.filter(legislators['bioguide_id'] == bioguide_id)[['first_name', 'last_name', 'party', 'state']].execute()
+        l = legislators.filter(legislators['bioguide_id'] == bioguide_id)[['first_name', 'last_name', 'party', 'state', 'district']].execute()
 
         # Filter rows with a value of 1 in the original category column
         politician_rows = classif.filter((classif[column] == 1) & (classif['bioguide_id'] == bioguide_id))[key_columns + ['text']].execute()
@@ -94,6 +94,7 @@ for column in key_columns:
             'party': l['party'].loc[0],
             'rank': str(int(idx+1)),
             'state': l['state'].loc[0],
+            'district': int(l['district'].loc[0]),
         }
 
         categories_dem[column][bioguide_id] = data
@@ -109,7 +110,7 @@ for column in key_columns:
     for idx, (_, politician) in enumerate(top_politicians.iterrows()):
         bioguide_id = politician['bioguide_id']
 
-        l = legislators.filter(legislators['bioguide_id'] == bioguide_id)[['first_name', 'last_name', 'party', 'state']].execute()
+        l = legislators.filter(legislators['bioguide_id'] == bioguide_id)[['first_name', 'last_name', 'party', 'state', 'district']].execute()
 
         # Filter rows with a value of 1 in the original category column
         politician_rows = classif.filter((classif[column] == 1) & (classif['bioguide_id'] == bioguide_id))[key_columns + ['text']].execute()
@@ -122,6 +123,7 @@ for column in key_columns:
             'party': l['party'].loc[0],
             'rank': str(int(idx+1)),
             'state': l['state'].loc[0],
+            'district': int(l['district'].loc[0]),
         }
 
         categories_rep[column][bioguide_id] = data

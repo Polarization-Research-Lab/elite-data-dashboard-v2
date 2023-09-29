@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
+
     // Load the state-legislators JSON
     fetch("assets/data/state-legislators.json")
         .then(response => response.json())
@@ -16,7 +17,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 var main = {
     build: function() {
-
         D = document
 
         const stateSelect = document.getElementById("stateSelect");
@@ -242,23 +242,65 @@ var main = {
         // THIS NEEDS TO BE TEMPLATED IN!
         function buildProfile(data, bioguide_id) {
             D.querySelector('#profile-name').innerHTML = `${data['first_name']} ${data['last_name']}`
-            // D.querySelector('#profile-pledge').innerHTML = 'No'
-            D.querySelector('#profile-chamber').innerHTML = (data['type'] === 'rep') ? 'Representative' : (data['type'] === 'sen') ? 'Senator' : ''
-            D.querySelector('#profile-party').innerHTML = `${data['party']}`
-            D.querySelector('#profile-state').innerHTML = `${data['state']}`
-            D.querySelector('#profile-district').innerHTML = data['district'] ? `District: ${data['district']}` : '';
-            // D.querySelector('#profile-serving-since').innerHTML = "some time" //data['']
+
             D.querySelector('#avatar').src = `assets/img/legislators/profile_images/${bioguide_id}.jpg`
             D.querySelector('#avatar').addEventListener('error', function() {
                 this.src = `assets/img/avatar-default.svg`
             });
-            D.querySelector('#efficacy-img').src = `https://prlpublic.s3.amazonaws.com/pulse/toplines/${bioguide_id}.png`
+            D.querySelector('#avatar-link').href = data['website']
 
-            // D.querySelector('#').innerHTML = data['']
+            // D.querySelector('#profile-pledge').innerHTML = 'No'
+            D.querySelector('#profile-role').innerHTML = (data['type'] === 'rep') ? 'Representative' : (data['type'] === 'sen') ? 'Senator' : ''
+            D.querySelector('#profile-chamber').innerHTML = (data['type'] === 'rep') ? 'House' : (data['type'] === 'sen') ? 'Senate' : ''
+            D.querySelector('#profile-party').innerHTML = `${data['party']}`
+            D.querySelector('#profile-state').innerHTML = [...stateSelect.options].find(option => option.value === data['state']).innerHTML
+            D.querySelector('#profile-district').innerHTML = data['district'] ? `<p>District: ${data['district']}</p>` : '';
+            D.querySelector('#profile-class').innerHTML = data['senate_class'] ? `<p>Senate Class: ${data['senate_class']}</p>` : '';
+            D.querySelector('#profile-serving-chamber-since').innerHTML = data['serving_current_chamber_since'] ? data['serving_current_chamber_since'].split('-')[0] : '[?]';
+            D.querySelector('#profile-serving-congress-since').innerHTML = data['serving_congress_since'] ? data['serving_congress_since'].split('-')[0] : '[?]';
+            D.querySelector('#profile-birthday').innerHTML = new Date(data['birthday']).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+
+            //D.querySelectorAll('.name').innerHTML = `${data['first_name']} ${data['last_name']}`
+
+            var names = document.querySelectorAll(".name")
+ 
+            for (i = 0; i < names.length; i++) {
+                names[i].innerHTML = `${data['first_name']} ${data['last_name']}`;
+            }
+
+            D.querySelector('#talk').innerHTML = `What does ${data['first_name']} ${data['last_name']} focus on?`
+            D.querySelector('#efficacy').innerHTML = `How effective is ${data['first_name']} ${data['last_name']} as a legislator?`
+            D.querySelector('#ideology').innerHTML = `How ideologically extreme is ${data['first_name']} ${data['last_name']}?`
+            D.querySelector('#money').innerHTML = `How does ${data['first_name']} ${data['last_name']} raise money?`
+            D.querySelector('#ideology-img').src = `https://d3d9notewc4uep.cloudfront.net/${bioguide_id}.png`
+            D.querySelector('#efficacy-img').src = `https://d3d9notewc4uep.cloudfront.net/bills_${bioguide_id}.png`
+            D.querySelector('#efficacy-co-img').src = `https://d3d9notewc4uep.cloudfront.net/bills_cosponsor_${bioguide_id}.png`
+            D.querySelector('#mini-ideology-img').src = `https://d3d9notewc4uep.cloudfront.net/${bioguide_id}_bar.png`
+            
+            D.querySelector('#money-total-img').src = `https://d3d9notewc4uep.cloudfront.net/money_${bioguide_id}_total.png`
+            D.querySelector('#money-count-img').src = `https://d3d9notewc4uep.cloudfront.net/money_${bioguide_id}_count.png`
+            D.querySelector('#money-map-img').src = `https://d3d9notewc4uep.cloudfront.net/${bioguide_id}_map.png`
+            D.querySelector('#money-inout-img').src = `https://d3d9notewc4uep.cloudfront.net/money_${bioguide_id}_instate.png`
+            D.querySelector('#attendence-img').src = `https://d3d9notewc4uep.cloudfront.net/attendence_${bioguide_id}.png`
+            D.querySelector('#policy_area-img').src = `https://d3d9notewc4uep.cloudfront.net/bills_policy_area_${bioguide_id}.png`
+
+            D.querySelector('#profile-links-twitter').href = `https://twitter.com/${data['twitter']}`
+            D.querySelector('#profile-links-facebook').href = `https://www.facebook.com/{data['facebook']}`
+            // D.querySelector('#profile-links-website').href = data['website']
+            D.querySelector('#profile-links-contact').href = data['contact']
+            D.querySelector('#profile-links-gov').href = `https://bioguide.congress.gov/search/bio/${bioguide_id}`
+
+            // next election
+            var currentYear = new Date().getFullYear();
+            if (data['type'] === 'rep') {
+                D.querySelector('#profile-next-election').innerHTML = currentYear + (currentYear % 2 === 0 ? 2 : 1); // <-- get next even numbered year
+            } else {
+                D.querySelector('#profile-next-election').innerHTML = (year => year + (6 - (year - (data['senate_class'] === 1 ? 2018 : data['senate_class'] === 2 ? 2020 : data['senate_class'] === 3 ? 2022 : currentYear)) % 6))(new Date().getFullYear(), data['senate_class']) // <-- get next 6th year in cycle
+            }
 
             // update discourse rose
+            console.log(charts)
             chart = charts[`discourse-bar`]
-
             chart.data.datasets[0].data = categories.map(category => Math.round(data['scorecard'][category]['percent'] * 1000) / 10);
 
             backgroundColors = charts['discourse-bar'].data.datasets[0].backgroundColor
@@ -281,11 +323,8 @@ var main = {
                 const roundedRank = Math.round(rank);
                 const ordinalSuffix = getOrdinalSuffix(roundedRank);
 
-                // Update the innerHTML of the span
-                const parentElement = chart.canvas.closest('.category-guage');
-
                 // Find the closest span with class "place" within the parent element
-                const spanElement = parentElement.querySelector('span.place');
+                const spanElement = chart.canvas.parentNode.parentNode.parentNode.querySelector('span.place');
                 // Update the innerHTML of the found span
                 if (spanElement) {
                     spanElement.innerHTML = `<b>${roundedRank}</b><sup>${ordinalSuffix}</sup>`;
@@ -305,13 +344,13 @@ var main = {
                 // document.querySelector($GET CLOSEST SPAN WITH CLASS "PLACE"$).innerHTML = `${roundedRank}${ordinalSuffix}`;
 
                 // # Example
-                if (data['scorecard'][category]['example']) {
-                    D.querySelector(`#profile-quote-info-${category}`).innerHTML = data['scorecard'][category]['example']['source'];
-                    D.querySelector(`#profile-quote-${category}`).innerHTML = data['scorecard'][category]['example']['text'];
-                } else {
-                    D.querySelector(`#profile-quote-info-${category}`).innerHTML = '',
-                        D.querySelector(`#profile-quote-${category}`).innerHTML = '';
-                }
+                // if (data['scorecard'][category]['example']) {
+                //     D.querySelector(`#profile-quote-info-${category}`).innerHTML = data['scorecard'][category]['example']['source'];
+                //     D.querySelector(`#profile-quote-${category}`).innerHTML = data['scorecard'][category]['example']['text'];
+                // } else {
+                //     D.querySelector(`#profile-quote-info-${category}`).innerHTML = '',
+                //     D.querySelector(`#profile-quote-${category}`).innerHTML = '';
+                // }
             }
         }
 
@@ -332,25 +371,25 @@ var main = {
 
         const categoryCards = document.querySelectorAll(".category-card");
 
-        categoryCards.forEach(function(categoryCard) {
-            const recentExample = categoryCard.querySelector(".recent-examples");
+        // categoryCards.forEach(function(categoryCard) {
+        //     const recentExample = categoryCard.querySelector(".recent-examples");
 
-            // Initially hide recent-examples
-            recentExample.style.height = "0";
-            recentExample.style.overflow = "hidden";
-            recentExample.style.transition = "height 0.3s ease";
+        //     // Initially hide recent-examples
+        //     recentExample.style.height = "0";
+        //     recentExample.style.overflow = "hidden";
+        //     recentExample.style.transition = "height 0.3s ease";
 
-            // Add click event listener
-            categoryCard.addEventListener("click", function() {
-                if (recentExample.style.height === "0px") {
-                    // Show recent-examples with slide-in effect
-                    recentExample.style.height = recentExample.scrollHeight + "px";
-                } else {
-                    // Hide recent-examples with slide-out effect
-                    recentExample.style.height = "0";
-                }
-            });
-        });
+        //     // Add click event listener
+        //     categoryCard.addEventListener("click", function() {
+        //         if (recentExample.style.height === "0px") {
+        //             // Show recent-examples with slide-in effect
+        //             recentExample.style.height = recentExample.scrollHeight + "px";
+        //         } else {
+        //             // Hide recent-examples with slide-out effect
+        //             recentExample.style.height = "0";
+        //         }
+        //     });
+        // });
 
         // Check for BioGuide ID
         var currentURL = new URL(window.location.href);

@@ -4,9 +4,12 @@
             {%- assign default_paths = site.pages | map: "path" -%}
             {%- assign page_paths = site.header_pages | default: default_paths -%}
             {%- assign titles_size = site.pages | map: 'title' | join: '' | size -%}
-            <a href='https://polarizationresearchlab.org/'><img src="{{ site.baseurl }}/assets/img/logo.png" alt="Logo" class="rounded-circle logo-img mr-2" /></a>
+            <div class="mr-4 mt-3" id='logo-img-div'><a href='https://polarizationresearchlab.org/'><img src="{{ site.baseurl }}/assets/img/logo.png" alt="Logo" class="logo-img" /></a></div>
             <a class="site-title" rel="author" href="{{ '/' | relative_url }}"><button class='page-link-btn'>
+            Project Chromite
+            {% comment %}
                 {{ site.title | escape }}
+            {% endcomment %}
             </button></a>
         </div>
         <div class="col-8 d-flex align-items-center flex-row-reverse">

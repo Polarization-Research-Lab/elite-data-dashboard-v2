@@ -24,7 +24,7 @@ function build() {
             options: {
                 rotation: 270, // start angle in degrees
                 circumference: 180, // sweep angle in degrees
-                maintainAspectRatio: false,
+                maintainAspectRatio: true,
                 responsive: true,
                 plugins: {
                     tooltip: {

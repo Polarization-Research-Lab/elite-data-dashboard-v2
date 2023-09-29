@@ -42,7 +42,7 @@ layout: base
                         <ul>
                         <li>Learn what your representatives talk about</li>
                         <li>Learn how extreme they are</li>
-                        <li>Learn how effective they are passing legislation</li>
+                        <li>Learn how effective they are at passing legislation</li>
                         </ul>
                           </div>  
                                 <h4 class='text-center'>Select a state to start</h4>
@@ -62,7 +62,7 @@ layout: base
         </div>
         <!-- Section 2: Politician Selector -->
         <!-- <div class="col-md-4 custom-vfill-box d-none" id="section2-box"> -->
-        <div class="col-md-4 custom-vfill-box animate__animated animate__slideInUp" id="section2-box">
+        <div class="col-md-3 custom-vfill-box animate__animated animate__slideInUp" id="section2-box">
             <!-- <div class="p-4 custom-vfill custom-rounded d-none" id="section2"> -->
             <div class="p-4 custom-vfill animate__animated animate__slideInUp d-none" id="section2">
                 <div class="text-center state-title">
@@ -104,7 +104,6 @@ layout: base
 
 
 </div>
-
 
 <!-- <div id='start' class=''>
     <p class='m-5 display-1 animate__animated animate__fadeIn'>Tracking the tenor of elite discourse in the US.</p>

@@ -33,7 +33,7 @@
                                                 <img src="assets/img/legislators/profile_images/{{ legislator[0] }}.jpg" class="card-img rounded-circle p-2 img-rep" alt="legislator" onerror="this.src = 'assets/img/avatar-default.svg'">
                                             </div>
                                             <div class="card-body col my-auto">
-                                                <p class="text-left text-bold">{{ legislator[1].first_name }} {{ legislator[1].last_name }}</p><p> ({{ legislator[1].percent }}%)</p>
+                                                <p class="text-left"><b>{{ legislator[1].first_name }} {{ legislator[1].last_name }}</b></p><p>{% if legislator[1].district %}{{ legislator[1].state }}-{{ legislator[1].district }}{% else %}{{ legislator[1].state }}{% endif %}</p><p>({{ legislator[1].percent }}%)</p>
                                             </div>
                                         </div>
                                         {% endfor %}
@@ -51,7 +51,7 @@
                                                 <img src="assets/img/legislators/profile_images/{{ legislator[0] }}.jpg" class="card-img rounded-circle p-2 img-rep" alt="legislator" onerror="this.src = 'assets/img/avatar-default.svg'">
                                             </div>
                                             <div class="card-body col my-auto">
-                                                <p class="text-left text-bold">{{ legislator[1].first_name }} {{ legislator[1].last_name }}</p><p>({{ legislator[1].percent }}%)</p>
+                                                <p class="text-left"><b>{{ legislator[1].first_name }} {{ legislator[1].last_name }}</b></p><p>{% if legislator[1].district %}{{ legislator[1].state }}-{{ legislator[1].district }}{% else %}{{ legislator[1].state }}{% endif %}</p><p>({{ legislator[1].percent }}%)</p>
                                             </div>
                                         </div>
                                         {% endfor %}
