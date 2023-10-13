@@ -43,8 +43,6 @@ header {
     // border: 20px rgba(0, 0, 0, 1);
 }
 
-$header-height: 50px;
-
 .hidden-header {
     transform: translateY(-100%);
     transition: transform 0.3s ease-in-out;
@@ -55,7 +53,6 @@ $header-height: 50px;
 }
 
 .site-header {
-    height: $header-height;
     border-bottom: none;
     /* Remove the bottom border */
     background-color: rgba(0, 0, 0, 0);
@@ -281,6 +278,7 @@ $header-height: 50px;
     // right: 10px;
 }
 
+
 #carousel {
     margin-right: 100px;
 }
@@ -424,7 +422,7 @@ h1, h2 {
 .title-card {
     border: none;
     color: #fff !important;
-    background-color: #2274A5;
+    background-color: #3b75f5 !important;
     padding: 20px;
     margin:0;
     width:100%;
@@ -459,7 +457,7 @@ h1, h2 {
     margin-bottom: 0px;
     font-weight: bold;
     font-size: 1rem;
-    padding: 5px 5px 5px 10px !important;
+    padding: 10px 5px 10px 10px !important;
     border-top-right-radius: 8px;
     border-top-left-radius: 8px;
     color:#fff
@@ -616,6 +614,42 @@ h1, h2 {
 }
 
 .btn_switch {
-    background-color: #2274A5;
+    background-color: #0d6efd;
     color: #ffffff;
+}
+
+/* Hide scrollbar for Chrome, Firefox, and Safari */
+/* Note: This may not work in all versions of all browsers */
+
+/* Hide vertical scrollbar */
+::-webkit-scrollbar {
+  width: 0;
+  display: none; /* Safari and Chrome */
+}
+
+/* Hide horizontal scrollbar */
+::-webkit-scrollbar-horizontal {
+  height: 0;
+  display: none; /* Safari and Chrome */
+}
+
+/* Hide scrollbar for Firefox */
+* {
+  scrollbar-width: none;
+}
+
+/* Hide scrollbar for Edge and IE */
+/* Note: This is for Microsoft Edge and Internet Explorer 10 and 11 */
+/* These browsers use their own proprietary scrollbar styles */
+/* You can adjust this as needed */
+*::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+.gauge-header{
+    color: #3b75f5 !important;
+    font-size: 1.2rem;
+    font-weight: bold;
 }

@@ -72,7 +72,26 @@
             <div class="maincard">
                 <p>We collected everything <span class="name"></span> said in Congress, to the media, to constituents, and on Twitter/X. We then looked at what they said to understand when they are working for America (talking about policy/foreign policy, compromising, and advancing legislation), and when they are generating conflict (insulting people, blaming people, and making accusations).</p>
                 <h6>Substance or division?</h6>
-                <div class="small right-text">Overall | In Congress | On Twitter/X | Press Releases/Newsletters | In online ads</div>
+                <ul class="nav nav-tabs" id="DiscoursePlotTabPanel" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="overall-tab" data-bs-toggle="tab" data-bs-target="#overall-tab-pane" type="button" role="tab" aria-controls="overall-tab-pane" aria-selected="true">Overall</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="inCongress-tab" data-bs-toggle="tab" data-bs-target="#inCongress-tab-pane" type="button" role="tab" aria-controls="inCongress-tab-pane" aria-selected="false">In Congress</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="twitter-tab" data-bs-toggle="tab" data-bs-target="#twitter-tab-pane" type="button" role="tab" aria-controls="twitter-tab-pane" aria-selected="false">On Twitter/X</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="public-tab" data-bs-toggle="tab" data-bs-target="#public-tab-pane" type="button" role="tab" aria-controls="public-tab-pane" aria-selected="false">Press Releases/Newsletters</button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="DiscoursePlotTabPanelContent">
+                    <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0"></div>
+                    <div class="tab-pane fade" id="inCongress-tab-pane" role="tabpanel" aria-labelledby="inCongress-tab" tabindex="0"></div>
+                    <div class="tab-pane fade" id="twitter-tab-pane" role="tabpanel" aria-labelledby="twitter-tab" tabindex="0"></div>
+                    <div class="tab-pane fade" id="public-tab-pane" role="tabpanel" aria-labelledby="public-tab" tabindex="0"></div>
+                </div>
                 <div class='row' id='discourse'>
                     <div class='col-12' id='discourse-bar-div'>
                         <canvas id='discourse-bar' class='dynamic-chart' data-script="{{ site.baseurl }}/assets/modules/charts/discourse-bar.js"></canvas>
@@ -92,6 +111,7 @@
                     {% for category in site.data.meta.categories %}
                     <div class='col-6 mx-auto {% comment %}hover-card{% endcomment %} category-card align-items-middle' id='profile-card-category-{{category}}'>
                         <div class='row'>
+                            <h5 class="text-center text-wrap mt-0 gauge-header">{{ site.data.meta.category_labels[index] }}</h5>
                             <div class='col-4 category-gauge my-auto align-items-middle'>
                                 <div class="w-100 category-gauge-div position-relative mt-0">
                                     <canvas id="gauge-{{category}}" class="dynamic-chart" data-script="{{ site.baseurl }}/assets/modules/charts/gauge.js" data-gauge="50" data-max="{{ site.data.meta.max_politicians }}" data-color="green"></canvas>
@@ -100,7 +120,7 @@
                                     <div class="text-secondary small">1</div>
                                     <div class="text-secondary small">535</div>
                                 </div>
-                                <h5 class="text-center text-wrap mt-0"><span class="place"></span><br>{{ site.data.meta.category_labels[index] }}</h5>
+                                <h5 class="text-center text-wrap mt-0"><span class="place"></span></h5>
                             </div>
                             <div class='col-8'>
                                 <div class='source-bar-div position-relative h-100'>

@@ -65,7 +65,7 @@ var main = {
                 .then(response => response.json())
                 .then(data => {
                     buildProfile(data, bioguide_id)
-                    
+
                     // Push the new URL to the browser's history
                     var currentURL = new URL(window.location.href); // Get the current URL
                     var searchParams = new URLSearchParams(currentURL.search); // Get the search parameters
@@ -263,7 +263,7 @@ var main = {
             //D.querySelectorAll('.name').innerHTML = `${data['first_name']} ${data['last_name']}`
 
             var names = document.querySelectorAll(".name")
- 
+
             for (i = 0; i < names.length; i++) {
                 names[i].innerHTML = `${data['first_name']} ${data['last_name']}`;
             }
@@ -276,12 +276,12 @@ var main = {
             D.querySelector('#efficacy-img').src = `https://d3d9notewc4uep.cloudfront.net/bills_${bioguide_id}.png`
             D.querySelector('#efficacy-co-img').src = `https://d3d9notewc4uep.cloudfront.net/bills_cosponsor_${bioguide_id}.png`
             D.querySelector('#mini-ideology-img').src = `https://d3d9notewc4uep.cloudfront.net/${bioguide_id}_bar.png`
-            
+
             D.querySelector('#money-total-img').src = `https://d3d9notewc4uep.cloudfront.net/money_${bioguide_id}_total.png`
             D.querySelector('#money-count-img').src = `https://d3d9notewc4uep.cloudfront.net/money_${bioguide_id}_count.png`
             D.querySelector('#money-map-img').src = `https://d3d9notewc4uep.cloudfront.net/${bioguide_id}_map.png`
             D.querySelector('#money-inout-img').src = `https://d3d9notewc4uep.cloudfront.net/money_${bioguide_id}_instate.png`
-            D.querySelector('#attendence-img').src = `https://d3d9notewc4uep.cloudfront.net/attendence_${bioguide_id}.png`
+            D.querySelector('#attendence-img').src = `https://d3d9notewc4uep.cloudfront.net/${bioguide_id}_attend.png`
             D.querySelector('#policy_area-img').src = `https://d3d9notewc4uep.cloudfront.net/bills_policy_area_${bioguide_id}.png`
 
             D.querySelector('#profile-links-twitter').href = `https://twitter.com/${data['twitter']}`
@@ -299,13 +299,37 @@ var main = {
             }
 
             // update discourse rose
-            console.log(charts)
             chart = charts[`discourse-bar`]
             chart.data.datasets[0].data = categories.map(category => Math.round(data['scorecard'][category]['percent'] * 1000) / 10);
-
             backgroundColors = charts['discourse-bar'].data.datasets[0].backgroundColor
-
             chart.update()
+
+            // Add Source Listeners
+            const navTabs = document.querySelector('#DiscoursePlotTabPanel');
+            navTabs.addEventListener('click', function(event) {
+                if (event.target.classList.contains('nav-link')) {
+                    // Check which button was clicked
+                    if (event.target.id === 'overall-tab') {
+                        charts[`discourse-bar`].data.datasets[0].data = categories.map(category => Math.round(data['scorecard'][category]['percent'] * 1000) / 10);
+                        console.log(categories.map(category => Math.round(data['scorecard'][category]['percent'] * 1000) / 10))
+                        charts[`discourse-bar`].update()
+                    } else if (event.target.id === 'inCongress-tab') {
+                        charts[`discourse-bar`].data.datasets[0].data = categories.map(category => Math.round(data['scorecard'][category]['sources']['floor']['percent'] * 1000) / 10);
+                        console.log(categories.map(category => Math.round(data['scorecard'][category]['sources']['floor']['percent'] * 1000) / 10))
+                        charts[`discourse-bar`].update()
+                    } else if (event.target.id === 'twitter-tab') {
+                        charts[`discourse-bar`].data.datasets[0].data = categories.map(category => Math.round(data['scorecard'][category]['sources']['tweets']['percent'] * 1000) / 10);
+                        console.log(categories.map(category => Math.round(data['scorecard'][category]['sources']['tweets']['percent'] * 1000) / 10))
+                        charts[`discourse-bar`].update()
+                    } else if (event.target.id === 'public-tab') {
+                        charts[`discourse-bar`].data.datasets[0].data = categories.map(category => Math.round(((data['scorecard'][category]['sources']['newsletters']['percent'] + data['scorecard'][category]['sources']['statements']['percent']) / 2) * 1000) / 10);
+                        console.log(categories.map(category => Math.round(((data['scorecard'][category]['sources']['newsletters']['percent'] + data['scorecard'][category]['sources']['statements']['percent']) / 2) * 1000) / 10))
+                        charts[`discourse-bar`].update()
+                    }
+                }
+            })
+
+
 
             // update cateogry plots
             for (const [index, category] of categories.entries()) {
@@ -315,8 +339,7 @@ var main = {
                 chart = charts[`gauge-${category}`]
                 chart.data.datasets[0].data = [data['scorecard'][category]['rank'] - 10, 20, 535 - data['scorecard'][category]['rank'] - 10]
                 chart.data.datasets[0].needleValue = data['scorecard'][category]['rank']
-                // chart.data.datasets[0].backgroundColor = ['rgb(190,190,190)', backgroundColors[index], 'rgb(190,190,190)'];
-                chart.data.datasets[0].backgroundColor = ['rgb(190,190,190)', 'black', 'rgb(190,190,190)'];
+                chart.data.datasets[0].backgroundColor = ['rgb(190,190,190)', backgroundColors[index], 'rgb(190,190,190)'];
                 chart.update()
 
                 const rank = data['scorecard'][category]['rank'];
@@ -339,6 +362,7 @@ var main = {
                     data['scorecard'][category]['sources']['newsletters']['percent'] * 100,
                     data['scorecard'][category]['sources']['statements']['percent'] * 100,
                 ]
+                chart.data.datasets[0].backgroundColor = backgroundColors[index]
                 chart.update()
 
                 // document.querySelector($GET CLOSEST SPAN WITH CLASS "PLACE"$).innerHTML = `${roundedRank}${ordinalSuffix}`;
@@ -407,5 +431,10 @@ var main = {
                 sect3addin(bioguide_id);
             }
         }
+
+
+
+
+
     }
 }

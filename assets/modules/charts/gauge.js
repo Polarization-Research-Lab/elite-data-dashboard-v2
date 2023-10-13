@@ -15,7 +15,7 @@ function build() {
                 labels: [],
                 datasets: [{
                     label: 'place',
-                    data: [value - 1, 2, max - value - 1],
+                    data: [value - 10, 20, max - value - 10],
                     backgroundColor: ['rgb(190,190,190)', 'Teal', 'rgb(190,190,190)'],
                     min: 1,
                     max: max,
